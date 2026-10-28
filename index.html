@@ -209,9 +209,25 @@ header{
 .qr-download-btn:hover{background:#F3F6F8;border-color:#0F2E4A;color:#0F2E4A}
 
 /* ---------- 분야 칩 ---------- */
-.chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid #E1E7EC;background:#FFFFFF;color:#2B3A48;transition:border-color .2s, color .2s}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:0 18px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:15px;
+  text-decoration:none;
+  border:1px solid #E1E7EC;
+  background:#FFFFFF;
+  color:#2B3A48;
+  transition:border-color .2s, color .2s;
+  white-space:nowrap;
+}
 .chip:hover{border-color:#0F2E4A;color:#0F2E4A}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
 
 /* ---------- 사업 카드 ---------- */
 .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
@@ -251,6 +267,22 @@ header{
   .hero-title{font-size:36px!important}
   .char-img{max-height:190px}
   .hero-section{padding:28px 0 20px}
+
+  /* 모바일 분야별 보기 2x2 완벽 대칭 */
+  .category-chips{
+    display:grid !important;
+    grid-template-columns:repeat(2, 1fr) !important;
+    width:100% !important;
+    max-width:360px !important;
+    gap:10px !important;
+    margin:0 auto !important;
+  }
+  .category-chips .chip{
+    width:100% !important;
+    padding:0 8px !important;
+    font-size:14px !important;
+    min-height:44px !important;
+  }
 }
 </style>
 </head>
@@ -288,9 +320,9 @@ header{
 
       <div class="share-popup" id="sharePopup">
         <div class="share-icons-top">
-          <button type="button" class="share-icon-btn btn-fb" onclick="shareFacebook()" title="페이스북 공유"></button>
-          <button type="button" class="share-icon-btn btn-blog" onclick="shareBlog()" title="네이버 블로그 공유"></button>
-          <button type="button" class="share-icon-btn btn-kakao" onclick="shareKakao()" title="카카오톡 공유"></button>
+          <button type="button" class="share-icon-btn btn-fb" onclick="shareFacebook()" title="페이스북 공유">f</button>
+          <button type="button" class="share-icon-btn btn-band" onclick="shareBlog()" title="네이버 블로그 공유">b</button>
+          <button type="button" class="share-icon-btn btn-kakao" onclick="shareKakao()" title="카카오톡 공유">k</button>
         </div>
         <div>
           <button type="button" class="btn-qr-trigger" id="openQrModalBtn" title="QR코드 크게보기">
@@ -308,21 +340,17 @@ header{
 <!-- [HERO] 중앙 정렬 텍스트 + 우측 천마니 + 바운스 π 캔버스 2개 -->
 <!-- ===================================================== -->
 <section class="hero-section" id="heroSection">
-  <!-- 초록 π 애니메이션 캔버스 -->
   <canvas id="piCanvasLeft" class="pi-bouncing-ball" width="46" height="46"></canvas>
-  <!-- 파랑 π 애니메이션 캔버스 -->
   <canvas id="piCanvasRight" class="pi-bouncing-ball" width="34" height="34"></canvas>
 
   <div class="wrap">
     <div class="hero-box">
-      <!-- 중앙 텍스트 그룹 -->
       <div class="hero-text-area">
         <span class="hero-badge">BUSAN SEO-GU YOUTH</span>
         <h1 class="hero-title">서구 청년 정책</h1>
         <p class="hero-desc">내일의 더 큰 도약을 위해 청년과 함께합니다.</p>
       </div>
 
-      <!-- 천마니 -->
       <div class="char-area">
         <img src="01.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
       </div>
@@ -331,12 +359,12 @@ header{
 </section>
 
 <!-- ===================================================== -->
-<!-- [CATEGORY] 분야별 바로가기                           -->
+<!-- [CATEGORY] 분야별 바로가기 -->
 <!-- ===================================================== -->
 <section id="category" style="background: #F5F8F9; padding: 20px 0; border-top: 1px solid #EDF1F4; border-bottom: 1px solid #EDF1F4">
-  <div class="wrap" style="display: flex; align-items: center; justify-content: center; gap: 14px 20px; flex-wrap: wrap">
+  <div class="wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
     <span style="font-size: 15px; font-weight: 700; color: #0F2233">분야별 보기</span>
-    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
+     <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
       <a class="chip" href="#policy-01"><span class="dot" style="background: #1C5D99"></span>일자리·창업</a>
       <a class="chip" href="#policy-04"><span class="dot" style="background: #2E6B52"></span>주거·자산</a>
       <a class="chip" href="#policy-06"><span class="dot" style="background: #D9693F"></span>생활·문화</a>
@@ -346,7 +374,7 @@ header{
 </section>
 
 <!-- ===================================================== -->
-<!-- [MAP] 사업 목록                                      -->
+<!-- [MAP] 사업 목록 -->
 <!-- ===================================================== -->
 <section id="roadmap" style="padding: 48px 0 88px">
   <div class="wrap">
@@ -357,7 +385,13 @@ header{
       <article class="pcard" id="policy-01">
         <div class="ptop"><span class="pnum">01</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
-          <div class="picon i-job"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path> <polyline points="9 22 9 12 15 12 15 22"></polyline> </svg> </div>
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 창업자 임차료 지원</h3>
             <ul class="plist">
               <li><b>대상</b>서구 거주 청년 창업자</li>
@@ -375,7 +409,13 @@ header{
       <article class="pcard" id="policy-02">
         <div class="ptop"><span class="pnum">02</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
-         <div class="picon i-job"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="8" r="6"></circle> <polyline points="8.21 13.89 7 22 12 19 17 22 15.79 13.88"></polyline> </svg> </div>
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="6"></circle>
+              <polyline points="8.21 13.89 7 22 12 19 17 22 15.79 13.88"></polyline>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 자격증 응시료 지원</h3>
             <ul class="plist">
               <li><b>대상</b>19세-39세 미취업 청년</li>
@@ -393,7 +433,13 @@ header{
       <article class="pcard" id="policy-03">
         <div class="ptop"><span class="pnum">03</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
-          <div class="picon i-job"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="10"></circle> <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon> </svg> </div>
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년도전 지원사업</h3>
             <ul class="plist">
               <li><b>대상</b>쉬었음 청년</li>
@@ -411,7 +457,14 @@ header{
       <article class="pcard" id="policy-04">
         <div class="ptop"><span class="pnum">04</span><span class="ptag t-home">주거·자산</span></div>
         <div class="pbody">
-          <div class="picon i-home"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M3 10.5L12 3l9 7.5"></path> <path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"></path> <path d="M9 21v-7a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v7"></path> </svg> </div>
+          <div class="picon i-home">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5L12 3l9 7.5"></path>
+              <path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"></path>
+              <path d="M9 21v-7a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v7"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 월세 지원</h3>
             <ul class="plist">
               <li><b>대상</b>19세-34세 중위소득 60%이하, 원가구 중위소득 100%이하 무주택 청년 가구</li>
@@ -429,7 +482,14 @@ header{
       <article class="pcard" id="policy-05">
         <div class="ptop"><span class="pnum">05</span><span class="ptag t-home">주거·자산</span></div>
         <div class="pbody">
-          <div class="picon i-home"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse> <path d="M4 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path> <path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"></path> </svg> </div>
+          <div class="picon i-home">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+              <path d="M4 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path>
+              <path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 자산형성 지원</h3>
             <ul class="plist">
               <li><b>대상</b>근로 중인 청년</li>
@@ -447,7 +507,12 @@ header{
       <article class="pcard" id="policy-06">
         <div class="ptop"><span class="pnum">06</span><span class="ptag t-life">생활·문화</span></div>
         <div class="pbody">
-          <div class="picon i-life"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> </svg> </div>
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 마음건강 지원</h3>
             <ul class="plist">
               <li><b>대상</b>마음의 휴식이 필요한 서구 청년</li>
@@ -465,7 +530,13 @@ header{
       <article class="pcard" id="policy-07">
         <div class="ptop"><span class="pnum">07</span><span class="ptag t-life">생활·문화</span></div>
         <div class="pbody">
-         <div class="picon i-life"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"></path> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path> </svg> </div>
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"></path>
+              <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 공간 활성화 지원</h3>
             <ul class="plist">
               <li><b>대상</b>서구 거주·활동 청년</li>
@@ -483,7 +554,13 @@ header{
       <article class="pcard" id="policy-08">
         <div class="ptop"><span class="pnum">08</span><span class="ptag t-life">생활·문화</span></div>
         <div class="pbody">
-          <div class="picon i-life"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path> </svg> </div>
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 도서 지원(예정)</h3>
             <ul class="plist">
               <li><b>대상</b>서구 거주 청년</li>
@@ -501,7 +578,17 @@ header{
       <article class="pcard" id="policy-09">
         <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">참여·공간</span></div>
         <div class="pbody">
-         <div class="picon i-join"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="4" y="3" width="16" height="18" rx="2"></rect> <line x1="8" y1="7" x2="10" y2="7"></line> <line x1="14" y1="7" x2="16" y2="7"></line> <line x1="8" y1="11" x2="10" y2="11"></line> <line x1="14" y1="11" x2="16" y2="11"></line> <path d="M10 21v-4h4v4"></path> </svg> </div>
+          <div class="picon i-join">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+              <line x1="8" y1="7" x2="10" y2="7"></line>
+              <line x1="14" y1="7" x2="16" y2="7"></line>
+              <line x1="8" y1="11" x2="10" y2="11"></line>
+              <line x1="14" y1="11" x2="16" y2="11"></line>
+              <path d="M10 21v-4h4v4"></path>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">서구 청년공간 무튼304 운영</h3>
             <ul class="plist">
               <li><b>내용</b>청년 누구에게나 프로그램, 보드게임, 휴식 공간 지원</li>
@@ -519,7 +606,17 @@ header{
       <article class="pcard" id="policy-10">
         <div class="ptop"><span class="pnum">10</span><span class="ptag t-join">참여·공간</span></div>
         <div class="pbody">
-          <div class="picon i-join"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M17 21a5 5 0 0 0-10 0"></path> <path d="M22 10.5a3.5 3.5 0 0 0-5.507-2.868"></path> <path d="M7.507 7.632A3.5 3.5 0 0 0 2 10.5"></path> <circle cx="12" cy="13" r="3"></circle> <circle cx="18.5" cy="4.5" r="2.5"></circle> <circle cx="5.5" cy="4.5" r="2.5"></circle> </svg> </div>
+          <div class="picon i-join">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21a5 5 0 0 0-10 0"></path>
+              <path d="M22 10.5a3.5 3.5 0 0 0-5.507-2.868"></path>
+              <path d="M7.507 7.632A3.5 3.5 0 0 0 2 10.5"></path>
+              <circle cx="12" cy="13" r="3"></circle>
+              <circle cx="18.5" cy="4.5" r="2.5"></circle>
+              <circle cx="5.5" cy="4.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div>
             <h3 class="ptitle">청년 정책 네트워크</h3>
             <ul class="plist">
               <li><b>대상</b>서구 정책에 관심 있는 청년</li>
@@ -538,13 +635,14 @@ header{
 </section>
 
 <!-- ===================================================== -->
-<!-- [FOOTER]                                              -->
+<!-- [FOOTER] (주소 아래로 대표전화 2줄 분리)             -->
 <!-- ===================================================== -->
 <footer style="border-top: 1px solid #EDF1F4; background: #F5F8F9; padding: 36px 0">
   <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #4A5B6B; line-height: 1.7">
     <div>
       <strong style="color: #0F2233">부산광역시 서구 일자리경제과</strong><br>
-      49247 부산광역시 구덕로 120(토성동4가) · 대표전화 051-240-4791
+      49247 부산광역시 구덕로 120(토성동4가)<br>
+      대표전화 051-240-4791
     </div>
     <div>© Busan Seo-gu. All rights reserved.</div>
   </div>
@@ -555,7 +653,7 @@ header{
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>
 </a>
 
-<!-- [QR코드 레이어 모달창][cite: 3] -->
+<!-- [QR코드 레이어 모달창] -->
 <div class="qr-modal-overlay" id="qrModalOverlay">
   <div class="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
     <div class="qr-modal-header" id="qrModalTitle">QR코드</div>
@@ -594,7 +692,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var qrModalOverlay = document.getElementById('qrModalOverlay');
   var qrGenerated = false;
 
-  // 헤더 공유 버튼 클릭 시 팝업 토글[cite: 4]
+  // 헤더 공유 버튼 클릭 시 팝업 토글
   shareBtn.addEventListener('click', function (e) {
     e.stopPropagation();
     var isOpen = sharePopup.classList.toggle('open');
@@ -612,7 +710,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // QR코드 아이콘 클릭 시 모달 열기[cite: 3, 4]
+  // QR코드 아이콘 클릭 시 모달 열기
   openQrModalBtn.addEventListener('click', function (e) {
     e.stopPropagation();
     sharePopup.classList.remove('open');
@@ -621,11 +719,10 @@ document.addEventListener('DOMContentLoaded', function () {
     iconClose.style.display = 'none';
 
     if (!qrGenerated) {
-      var currentUrl = window.location.href;
       var qrBox = document.getElementById('pageQrBox');
       qrBox.innerHTML = '';
       new QRCode(qrBox, {
-        text: currentUrl,
+        text: SITE_URL,
         width: 170,
         height: 170,
         colorDark: '#1E64C8',
@@ -649,7 +746,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-/* QR 다운로드 함수[cite: 3] */
+/* QR 다운로드 함수 */
 function downloadQrCode() {
   var qrBox = document.getElementById('pageQrBox');
   var img = qrBox.querySelector('img');
@@ -678,12 +775,14 @@ function downloadQrCode() {
 function shareFacebook() {
   var url = encodeURIComponent(SITE_URL);
   var width = 600; var height = 450; var left = (window.innerWidth - width) / 2 + window.screenX; var top = (window.innerHeight - height) / 2 + window.screenY;
-var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + url; window.open( shareUrl, 'facebook-share-dialog', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ',toolbar=no,menubar=no,scrollbars=yes,resizable=yes' ); }
+  var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + url; 
+  window.open(shareUrl, 'facebook-share-dialog', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ',toolbar=no,menubar=no,scrollbars=yes,resizable=yes');
+}
 
 function shareBlog() {
   var url = encodeURIComponent(SITE_URL);
   var title = encodeURIComponent(document.title);
-  window.open('https://share.naver.com/web/shareView', 'width=600,height=600');
+  window.open('https://share.naver.com/web/shareView?url=' + url + '&title=' + title, '_blank', 'width=600,height=500');
 }
 
 function shareKakao() {
@@ -721,7 +820,6 @@ function fallbackCopyText(text) {
   alert('페이지 주소가 복사되었습니다.');
 }
 </script>
-
 
 <!-- π 패턴 애니메이션 (흰색 잔상 제거 + 0.35px 라인) -->
 <script>
@@ -783,11 +881,9 @@ function fallbackCopyText(text) {
     balls.forEach(function (ball) {
       if (!ball.cv) return;
 
-      // 1. 물리 좌표 이동
       ball.x += ball.vx;
       ball.y += ball.vy;
 
-      // 좌우 벽 충돌 검사
       if (ball.x <= 0) {
         ball.x = 0;
         ball.vx = -ball.vx;
@@ -796,7 +892,6 @@ function fallbackCopyText(text) {
         ball.vx = -ball.vx;
       }
 
-      // 상하 벽 충돌 검사
       if (ball.y <= 0) {
         ball.y = 0;
         ball.vy = -ball.vy;
@@ -807,7 +902,6 @@ function fallbackCopyText(text) {
 
       ball.cv.style.transform = 'translate3d(' + ball.x + 'px, ' + ball.y + 'px, 0)';
 
-      // 2. π 궤적 드로잉 (흰색 덮어쓰기 제거 + 0.35px 라인)
       var ctx = ball.ctx;
       ctx.lineWidth = 0.35;
       ctx.strokeStyle = ball.color;
@@ -823,7 +917,6 @@ function fallbackCopyText(text) {
       }
       ctx.stroke();
 
-      // 한 루프 완료 시 투명하게 즉시 초기화 후 재시작
       if (ball.t >= ball.MAX_T) {
         ctx.clearRect(0, 0, SIZE, SIZE);
         ball.t = 0;
