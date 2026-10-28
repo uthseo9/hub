@@ -208,27 +208,6 @@ header{
 }
 .qr-download-btn:hover{background:#F3F6F8;border-color:#0F2E4A;color:#0F2E4A}
 
-/* ---------- 분야 칩 ---------- */
-.chip{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  min-height:42px;
-  padding:0 18px;
-  border-radius:999px;
-  font-weight:600;
-  font-size:15px;
-  text-decoration:none;
-  border:1px solid #E1E7EC;
-  background:#FFFFFF;
-  color:#2B3A48;
-  transition:border-color .2s, color .2s;
-  white-space:nowrap;
-}
-.chip:hover{border-color:#0F2E4A;color:#0F2E4A}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
-
 /* ---------- 사업 카드 ---------- */
 .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .pcard{display:flex;flex-direction:column;gap:20px;padding:32px;border:1px solid #E1E7EC;border-radius:24px;background:#FFFFFF;scroll-margin-top:24px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
@@ -267,22 +246,6 @@ header{
   .hero-title{font-size:36px!important}
   .char-img{max-height:190px}
   .hero-section{padding:28px 0 20px}
-
-  /* 모바일 분야별 보기 2x2 완벽 대칭 */
-  .category-chips{
-    display:grid !important;
-    grid-template-columns:repeat(2, 1fr) !important;
-    width:100% !important;
-    max-width:360px !important;
-    gap:10px !important;
-    margin:0 auto !important;
-  }
-  .category-chips .chip{
-    width:100% !important;
-    padding:0 8px !important;
-    font-size:14px !important;
-    min-height:44px !important;
-  }
 }
 </style>
 </head>
@@ -354,21 +317,6 @@ header{
       <div class="char-area">
         <img src="01.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================================================== -->
-<!-- [CATEGORY] 분야별 바로가기 -->
-<!-- ===================================================== -->
-<section id="category" style="background: #F5F8F9; padding: 20px 0; border-top: 1px solid #EDF1F4; border-bottom: 1px solid #EDF1F4">
-  <div class="wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
-    <span style="font-size: 15px; font-weight: 700; color: #0F2233">분야별 보기</span>
-     <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
-      <a class="chip" href="#policy-01"><span class="dot" style="background: #1C5D99"></span>일자리·창업</a>
-      <a class="chip" href="#policy-04"><span class="dot" style="background: #2E6B52"></span>주거·자산</a>
-      <a class="chip" href="#policy-06"><span class="dot" style="background: #D9693F"></span>생활·문화</a>
-      <a class="chip" href="#policy-09"><span class="dot" style="background: #4B4F7A"></span>참여·공간</a>
     </div>
   </div>
 </section>
