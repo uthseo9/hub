@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부산 서구 청년정책</title>
+<!-- 폰트: Pretendard (CDN) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<!-- QR 코드 자동 생성 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF}
+*{box-sizing:border-box}
+a{color:#1C5D99}a:hover{color:#0F2E4A}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ---------- 헤더 ---------- */
+header{
+  position:relative;
+  background:#FFFFFF;
+  border-bottom:1px solid #EDF1F4;
+}
+.header-content{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  min-height:68px;
+}
+
+/* ---------- 히어로 영역 ---------- */
+.hero-section{
+  position:relative;
+  padding: 40px 0 32px;
+  overflow:hidden;
+}
+.hero-box{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+.hero-text-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:16px;
+}
+
+.hero-badge{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  color:#1C5D99;
+  background:#E6F0F8;
+  padding:6px 16px;
+  border-radius:999px;
+  display:inline-block;
+  line-height:1.5;
+}
+
+.hero-title{
+  margin:0;
+  font-size:46px;
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:-0.035em;
+  color:#0F2233;
+}
+.hero-desc{
+  margin:0;
+  font-size:17px;
+  line-height:1.6;
+  color:#4A5B6B;
+  max-width:28em;
+}
+
+/* 히어로 바운스 π 캔버스 */
+.pi-bouncing-ball{
+  position:absolute;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+  filter:drop-shadow(0 3px 8px rgba(15,46,74,0.12));
+}
+
+/* 천마니 영역 */
+.char-area{
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.char-img{
+  max-width:100%;
+  max-height:220px;
+  object-fit:contain;
+  transform-origin: 35% 85%;
+  animation: waveMotion 3.8s ease-in-out infinite;
+}
+@keyframes waveMotion {
+  0%, 65%, 100% { transform: rotate(0deg); }
+  70%  { transform: rotate(5.5deg); }
+  75%  { transform: rotate(-4deg); }
+  80%  { transform: rotate(5deg); }
+  85%  { transform: rotate(-2deg); }
+  90%  { transform: rotate(0deg); }
+}
+
+/* ---------- 상단 헤더 공유 메뉴 ---------- */
+.share-wrap{position:relative}
+.share-toggle-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:#FDECEF;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#FF4E6B;transition:all .2s ease;outline:none;
+}
+.share-toggle-btn:hover{background:#FCD7DE}
+.share-toggle-btn.active{background:#0F2E4A;color:#FFFFFF}
+
+.share-popup{
+  position:absolute;right:0;top:54px;z-index:100;
+  width:160px;padding:14px;border-radius:24px;
+  background:#FFFFFF;box-shadow:0 8px 24px rgba(15,46,74,0.12);
+  border:1px solid #EDF1F4;display:none;flex-direction:column;gap:12px;
+}
+.share-popup.open{display:flex;animation:popFade .2s ease}
+@keyframes popFade{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.share-icons-top{display:flex;justify-content:space-between;gap:8px}
+.share-icon-btn{
+  width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#FFF;font-weight:800;font-size:15px;text-decoration:none;transition:transform .15s ease;
+}
+.share-icon-btn:hover{transform:scale(1.06)}
+.btn-fb{background:#3B5998}
+.btn-band{background:#00C73C;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+.btn-kakao{background:#FFCD00;color:#261803;font-size:12px;font-weight:900}
+
+/* QR 트리거 버튼 */
+.btn-qr-trigger{
+  width:40px;height:40px;border-radius:10px;border:none;
+  background:transparent;cursor:pointer;display:inline-flex;
+  align-items:center;justify-content:center;color:#222;
+  transition:background .2s;padding:0;
+}
+.btn-qr-trigger:hover{background:#F1F4F7}
+
+/* ---------- QR 코드 모달 창 ---------- */
+.qr-modal-overlay{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(15,34,51,0.55);backdrop-filter:blur(2px);
+  z-index:999;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.qr-modal-overlay.show{display:flex;animation:modalFade .2s ease}
+@keyframes modalFade{
+  from{opacity:0;transform:scale(0.96)}
+  to{opacity:1;transform:scale(1)}
+}
+.qr-modal{
+  width:100%;max-width:320px;background:#FFFFFF;
+  border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,0.22);
+  position:relative;display:flex;flex-direction:column;
+}
+.qr-modal-header{
+  background:#2979E7;color:#FFFFFF;padding:16px 20px;
+  font-size:18px;font-weight:800;text-align:center;letter-spacing:-0.02em;
+}
+.qr-modal-close{
+  position:absolute;top:10px;right:14px;background:none;border:none;
+  color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  padding:4px;opacity:0.85;transition:opacity .2s;
+}
+.qr-modal-close:hover{opacity:1}
+.qr-modal-body{
+  padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.qr-code-box{
+  width:180px;height:180px;display:flex;align-items:center;justify-content:center;
+}
+.qr-code-box img, .qr-code-box canvas{
+  max-width:100%;height:auto;
+}
+.qr-download-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:10px 22px;border:1.2px solid #CBD6DE;border-radius:8px;
+  background:#FFFFFF;color:#2B3A48;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all .2s;outline:none;
+}
+.qr-download-btn:hover{background:#F3F6F8;border-color:#0F2E4A;color:#0F2E4A}
+
+/* ---------- 분야 칩 ---------- */
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid #E1E7EC;background:#FFFFFF;color:#2B3A48;transition:border-color .2s, color .2s}
+.chip:hover{border-color:#0F2E4A;color:#0F2E4A}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* ---------- 사업 카드 ---------- */
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.pcard{display:flex;flex-direction:column;gap:20px;padding:32px;border:1px solid #E1E7EC;border-radius:24px;background:#FFFFFF;scroll-margin-top:24px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.pcard:hover{border-color:#B9C8D3;transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,46,74,.07)}
+.ptop{display:flex;align-items:center;justify-content:space-between}
+.pnum{font-size:14px;font-weight:800;letter-spacing:.08em;color:#8394A3}
+.ptag{font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+.t-job{background:#E6F0F8;color:#164C7E}
+.t-home{background:#E3F0E9;color:#245740}
+.t-life{background:#FBEAE2;color:#93401F}
+.t-join{background:#ECEDF6;color:#3E4270}
+.pbody{display:flex;gap:24px;align-items:flex-start}
+.picon{flex:none;width:88px;height:88px;border-radius:24px 24px 24px 6px;display:flex;align-items:center;justify-content:center}
+.i-job{background:#E6F0F8;color:#1C5D99}
+.i-home{background:#E3F0E9;color:#2E6B52}
+.i-life{background:#FBEAE2;color:#B4502F}
+.i-join{background:#ECEDF6;color:#4B4F7A}
+.ptitle{margin:4px 0 14px;font-size:22px;font-weight:800;color:#0F2233;letter-spacing:-.02em}
+.plist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.plist li{display:flex;gap:12px;font-size:16px;line-height:1.55;color:#3F4F5E}
+.plist b{flex:none;width:36px;font-weight:700;color:#0F2233}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:20px;border-top:1px dashed #E1E7EC}
+.ptel{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#2B3A48}
+.pbtn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:10px;background:#0F2E4A;color:#FFFFFF;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s}
+.pbtn:hover{background:#1C5D99;color:#FFFFFF}
+
+/* ---------- 모바일 반응형 ---------- */
+@media (max-width:900px){
+  .hero-box{
+    flex-direction:column;
+    gap:20px;
+  }
+  .pgrid{grid-template-columns:minmax(0,1fr)}
+  .pbody{flex-direction:column;gap:16px}
+  .pcard{padding:24px}
+  .hero-title{font-size:36px!important}
+  .char-img{max-height:190px}
+  .hero-section{padding:28px 0 20px}
+}
+</style>
+</head>
+<body>
+<div id="top" style="font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #0F2233; background: #FFFFFF; word-break: keep-all">
+
+<!-- ===================================================== -->
+<!-- [HEADER] 상단 바                                      -->
+<!-- ===================================================== -->
+<header>
+  <div class="wrap header-content">
+    <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0F2233">
+      <img src="logo.png" alt="부산광역시 서구 로고" style="width: 38px; height: 38px; object-fit: contain;">
+      <span style="display: flex; flex-direction: column; line-height: 1.15">
+        <span style="font-size: 12px; font-weight: 600; color: #4A5B6B">부산광역시 서구</span>
+        <span style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em">청년 정책 뭉치</span>
+      </span>
+    </a>
+    
+    <!-- 공유 버튼 & 팝업 영역 -->
+    <div class="share-wrap">
+      <button type="button" class="share-toggle-btn" id="shareBtn" aria-label="페이지 공유" title="페이지 공유">
+        <svg class="icon-share" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="share-popup" id="sharePopup">
+        <div class="share-icons-top">
+          <button type="button" class="share-icon-btn btn-fb" onclick="shareFacebook()" title="페이스북 공유"></button>
+          <button type="button" class="share-icon-btn btn-blog" onclick="shareBand()" title="네이버 블로그 공유"></button>
+          <button type="button" class="share-icon-btn btn-kakao" onclick="shareKakao()" title="카카오톡 공유"></button>
+        </div>
+        <div>
+          <button type="button" class="btn-qr-trigger" id="openQrModalBtn" title="QR코드 크게보기">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v3h-3v-3zm-5 0h3v3h-3v-3zm2 3h3v3h-3v-3zm3 2h3v3h-3v-3z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================== -->
+<!-- [HERO] 중앙 정렬 텍스트 + 우측 천마니 + 바운스 π 캔버스 2개 -->
+<!-- ===================================================== -->
+<section class="hero-section" id="heroSection">
+  <!-- 초록 π 애니메이션 캔버스 -->
+  <canvas id="piCanvasLeft" class="pi-bouncing-ball" width="46" height="46"></canvas>
+  <!-- 파랑 π 애니메이션 캔버스 -->
+  <canvas id="piCanvasRight" class="pi-bouncing-ball" width="34" height="34"></canvas>
+
+  <div class="wrap">
+    <div class="hero-box">
+      <!-- 중앙 텍스트 그룹 -->
+      <div class="hero-text-area">
+        <span class="hero-badge">BUSAN SEO-GU YOUTH</span>
+        <h1 class="hero-title">서구 청년 정책</h1>
+        <p class="hero-desc">내일의 더 큰 도약을 위해 청년과 함께합니다.</p>
+      </div>
+
+      <!-- 우측 밀착 배치된 천마니 -->
+      <div class="char-area">
+        <img src="천마니.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- [CATEGORY] 분야별 바로가기                           -->
+<!-- ===================================================== -->
+<section id="category" style="background: #F5F8F9; padding: 20px 0; border-top: 1px solid #EDF1F4; border-bottom: 1px solid #EDF1F4">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: center; gap: 14px 20px; flex-wrap: wrap">
+    <span style="font-size: 15px; font-weight: 700; color: #0F2233">분야별 보기</span>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
+      <a class="chip" href="#policy-01"><span class="dot" style="background: #1C5D99"></span>일자리·창업</a>
+      <a class="chip" href="#policy-04"><span class="dot" style="background: #2E6B52"></span>주거·자산</a>
+      <a class="chip" href="#policy-06"><span class="dot" style="background: #D9693F"></span>생활·문화</a>
+      <a class="chip" href="#policy-09"><span class="dot" style="background: #4B4F7A"></span>참여·공간</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- [MAP] 사업 목록                                      -->
+<!-- ===================================================== -->
+<section id="roadmap" style="padding: 48px 0 88px">
+  <div class="wrap">
+    
+    <div class="pgrid">
+
+      <!-- SECTION 01 -->
+      <article class="pcard" id="policy-01">
+        <div class="ptop"><span class="pnum">01</span><span class="ptag t-job">일자리·창업</span></div>
+        <div class="pbody">
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 창업자 임차료 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>서구 거주 청년 창업자</li>
+              <li><b>내용</b>월 최대 30만 원, 10개월 지원(본인부담 30%)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304/224379771136" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 02 -->
+      <article class="pcard" id="policy-02">
+        <div class="ptop"><span class="pnum">02</span><span class="ptag t-job">일자리·창업</span></div>
+        <div class="pbody">
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"></rect><circle cx="12" cy="10" r="3"></circle><path d="M8.5 17h7"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 자격증 응시료 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>19세-39세 미취업 청년</li>
+              <li><b>내용</b>자격증 응시료 최대 20만 원 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://www.bsseogu.go.kr/index.bsseogu?menuCd=DOM_000000102001005000" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 03 -->
+      <article class="pcard" id="policy-03">
+        <div class="ptop"><span class="pnum">03</span><span class="ptag t-job">일자리·창업</span></div>
+        <div class="pbody">
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 2 5 5 5 9l-2 4H9l-2-4c0-4 2-7 5-9z"></path><circle cx="12" cy="10" r="1.6"></circle><path d="M9.5 16l-1.5 4M14.5 16l1.5 4"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년도전 지원사업</h3>
+            <ul class="plist">
+              <li><b>대상</b>쉬었음 청년</li>
+              <li><b>내용</b>사회진입을 위한 프로그램, 수당 최대 220만 원 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4792</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304/224412082364" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 04 -->
+      <article class="pcard" id="policy-04">
+        <div class="ptop"><span class="pnum">04</span><span class="ptag t-home">주거·자산</span></div>
+        <div class="pbody">
+          <div class="picon i-home">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-5h4v5"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 월세 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>19세-34세 중위소득 60%이하, 원가구 중위소득 100%이하 무주택 청년 가구</li>
+              <li><b>내용</b>월 최대 20만 원, 24개월 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004661" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 05 -->
+      <article class="pcard" id="policy-05">
+        <div class="ptop"><span class="pnum">05</span><span class="ptag t-home">주거·자산</span></div>
+        <div class="pbody">
+          <div class="picon i-home">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 자산형성 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>근로 중인 청년</li>
+              <li><b>내용</b>본인 저축액의 00 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>생활지원과 051-240-0000</span>
+          <a class="pbtn" href="https://www.bsseogu.go.kr" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 06 -->
+      <article class="pcard" id="policy-06">
+        <div class="ptop"><span class="pnum">06</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="pbody">
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 마음건강 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>마음의 휴식이 필요한 서구 청년</li>
+              <li><b>내용</b>전문 심리상담 바우처 제공</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>보건행정과 051-240-0000</span>
+          <a class="pbtn" href="https://www.bsseogu.go.kr" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 07 -->
+      <article class="pcard" id="policy-07">
+        <div class="ptop"><span class="pnum">07</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="pbody">
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"></path><path d="M14 7v10" stroke-dasharray="2 2.2"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 공간 활성화 지원</h3>
+            <ul class="plist">
+              <li><b>대상</b>서구 거주·활동 청년</li>
+              <li><b>내용</b>크루 활동, 원데이클래스 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4794</span>
+          <a class="pbtn" href="https://www.instagram.com/muten_304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 08 -->
+      <article class="pcard" id="policy-08">
+        <div class="ptop"><span class="pnum">08</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="pbody">
+          <div class="picon i-life">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16M8 18v2M16 18v2"></path><circle cx="8" cy="14.5" r="1"></circle><circle cx="16" cy="14.5" r="1"></circle></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 도서 지원(예정)</h3>
+            <ul class="plist">
+              <li><b>대상</b>서구 거주 청년</li>
+              <li><b>내용</b>지정 도서 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 09 -->
+      <article class="pcard" id="policy-09">
+        <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">참여·공간</span></div>
+        <div class="pbody">
+          <div class="picon i-join">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"></path><circle cx="12" cy="10" r="2.2"></circle></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">서구 청년공간 무튼304 운영</h3>
+            <ul class="plist">
+              <li><b>내용</b>청년 누구에게나 프로그램, 보드게임, 휴식 공간 지원</li>
+              <li><b>위치</b>구덕로 304(3층)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 070-4024-0304</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 10 -->
+      <article class="pcard" id="policy-10">
+        <div class="ptop"><span class="pnum">10</span><span class="ptag t-join">참여·공간</span></div>
+        <div class="pbody">
+          <div class="picon i-join">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16.5 14c2.5 0.2 4.5 2.3 4.5 5"></path></svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 정책 네트워크</h3>
+            <ul class="plist">
+              <li><b>대상</b>서구 정책에 관심 있는 청년</li>
+              <li><b>내용</b>정책 제안·모니터링 활동, 활동비 최대 3만 원 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4794</span>
+          <a class="pbtn" href="https://blog.naver.com/PostList.naver?blogId=muten304&categoryNo=11&skinType=&skinId=&from=menu" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- [FOOTER]                                              -->
+<!-- ===================================================== -->
+<footer style="border-top: 1px solid #EDF1F4; background: #F5F8F9; padding: 36px 0">
+  <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #4A5B6B; line-height: 1.7">
+    <div>
+      <strong style="color: #0F2233">부산광역시 서구 일자리경제과</strong><br>
+      49247 부산광역시 구덕로 120(토성동4가) · 대표전화 051-240-0000
+    </div>
+    <div>© Busan Seo-gu. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- 맨 위로 이동 버튼 -->
+<a href="#top" aria-label="맨 위로" style="position: fixed; right: 24px; bottom: 24px; width: 52px; height: 52px; border-radius: 50%; background: #FFFFFF; border: 1px solid #E1E7EC; box-shadow: 0 6px 20px rgba(15,46,74,.12); display: flex; align-items: center; justify-content: center; color: #0F2E4A; z-index: 50">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>
+</a>
+
+<!-- [QR코드 레이어 모달창][cite: 3] -->
+<div class="qr-modal-overlay" id="qrModalOverlay">
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+    <div class="qr-modal-header" id="qrModalTitle">QR코드</div>
+    <button type="button" class="qr-modal-close" id="closeQrModalBtn" aria-label="QR코드 팝업 닫기">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="qr-modal-body">
+      <div class="qr-code-box" id="pageQrBox"></div>
+      <button type="button" class="qr-download-btn" onclick="downloadQrCode()">
+        다운로드
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 15V3m0 12l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- 스크립트: 공유 메뉴 토글, QR 모달 제어 및 소셜 공유 연동 -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var shareBtn = document.getElementById('shareBtn');
+  var sharePopup = document.getElementById('sharePopup');
+  var iconShare = shareBtn.querySelector('.icon-share');
+  var iconClose = shareBtn.querySelector('.icon-close');
+
+  var openQrModalBtn = document.getElementById('openQrModalBtn');
+  var closeQrModalBtn = document.getElementById('closeQrModalBtn');
+  var qrModalOverlay = document.getElementById('qrModalOverlay');
+  var qrGenerated = false;
+
+  // 헤더 공유 버튼 클릭 시 팝업 토글[cite: 4]
+  shareBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var isOpen = sharePopup.classList.toggle('open');
+    shareBtn.classList.toggle('active', isOpen);
+    iconShare.style.display = isOpen ? 'none' : 'block';
+    iconClose.style.display = isOpen ? 'block' : 'none';
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!sharePopup.contains(e.target) && !shareBtn.contains(e.target)) {
+      sharePopup.classList.remove('open');
+      shareBtn.classList.remove('active');
+      iconShare.style.display = 'block';
+      iconClose.style.display = 'none';
+    }
+  });
+
+  // QR코드 아이콘 클릭 시 모달 열기[cite: 3, 4]
+  openQrModalBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    sharePopup.classList.remove('open');
+    shareBtn.classList.remove('active');
+    iconShare.style.display = 'block';
+    iconClose.style.display = 'none';
+
+    if (!qrGenerated) {
+      var currentUrl = window.location.href;
+      var qrBox = document.getElementById('pageQrBox');
+      qrBox.innerHTML = '';
+      new QRCode(qrBox, {
+        text: currentUrl,
+        width: 170,
+        height: 170,
+        colorDark: '#1E64C8',
+        colorLight: '#FFFFFF',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      qrGenerated = true;
+    }
+
+    qrModalOverlay.classList.add('show');
+  });
+
+  closeQrModalBtn.addEventListener('click', function () {
+    qrModalOverlay.classList.remove('show');
+  });
+
+  qrModalOverlay.addEventListener('click', function (e) {
+    if (e.target === qrModalOverlay) {
+      qrModalOverlay.classList.remove('show');
+    }
+  });
+});
+
+/* QR 다운로드 함수[cite: 3] */
+function downloadQrCode() {
+  var qrBox = document.getElementById('pageQrBox');
+  var img = qrBox.querySelector('img');
+  var canvas = qrBox.querySelector('canvas');
+  var dataUrl = '';
+
+  if (img && img.src && img.src.indexOf('data:image') === 0) {
+    dataUrl = img.src;
+  } else if (canvas) {
+    dataUrl = canvas.toDataURL('image/png');
+  }
+
+  if (dataUrl) {
+    var a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = '부산서구_청년정책_QR코드.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    alert('QR 코드를 생성 중입니다. 잠시 후 다시 시도해 주세요.');
+  }
+}
+
+/* 소셜 공유 함수 */
+function shareFacebook() {
+  var url = encodeURIComponent(window.location.href);
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'width=600,height=500');
+}
+
+function shareBand() {
+  var url = encodeURIComponent(window.location.href);
+  var title = encodeURIComponent(document.title);
+  window.open('https://band.us/plugin/share?body=' + title + '%0A' + url + '&route=' + url, '_blank', 'width=600,height=600');
+}
+
+function shareKakao() {
+  var url = window.location.href;
+  var title = document.title;
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: '부산 서구 청년 정책 안내',
+      url: url
+    }).catch(function(){});
+  } else {
+    copyPageLink();
+  }
+}
+
+function copyPageLink() {
+  var currentUrl = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(currentUrl).then(function () {
+      alert('페이지 주소가 복사되었습니다.');
+    }).catch(function () {
+      fallbackCopyText(currentUrl);
+    });
+  } else {
+    fallbackCopyText(currentUrl);
+  }
+}
+
+function fallbackCopyText(text) {
+  var temp = document.createElement('input');
+  temp.value = text;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand('copy');
+  document.body.removeChild(temp);
+  alert('페이지 주소가 복사되었습니다.');
+}
+</script>
+
+<!-- π 패턴 애니메이션 (흰색 잔상 제거 + 0.35px 라인) -->
+<script>
+(function () {
+  var hero = document.getElementById('heroSection');
+  if (!hero) return;
+
+  var SIZE = 48; // 공 직경
+  var dpr = window.devicePixelRatio || 1;
+
+  var balls = [
+    {
+      id: 'piCanvasLeft',
+      color: 'hsla(158, 70%, 36%, 0.85)', // 그린
+      x: 40,
+      y: 40,
+      vx: 1.5,
+      vy: 1.2
+    },
+    {
+      id: 'piCanvasRight',
+      color: 'hsla(212, 75%, 40%, 0.85)', // 블루
+      x: 240,
+      y: 80,
+      vx: -1.4,
+      vy: 1.3
+    }
+  ];
+
+  balls.forEach(function (ball) {
+    var cv = document.getElementById(ball.id);
+    if (!cv) return;
+    var ctx = cv.getContext('2d');
+    cv.width = SIZE * dpr;
+    cv.height = SIZE * dpr;
+    ctx.scale(dpr, dpr);
+
+    ball.cv = cv;
+    ball.ctx = ctx;
+    ball.t = 0;
+    ball.MAX_T = 380;
+    ball.STEP = 0.045;
+    ball.PER_FRAME = 32;
+    ball.R = SIZE / 2 - 2;
+    ball.C = SIZE / 2;
+  });
+
+  function point(th, C, R) {
+    return [
+      C + (Math.cos(th) + Math.cos(Math.PI * th)) * (R / 2),
+      C + (Math.sin(th) + Math.sin(Math.PI * th)) * (R / 2)
+    ];
+  }
+
+  function animate() {
+    var maxW = hero.clientWidth - SIZE;
+    var maxH = hero.clientHeight - SIZE;
+
+    balls.forEach(function (ball) {
+      if (!ball.cv) return;
+
+      // 1. 물리 좌표 이동
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+
+      // 좌우 벽 충돌 검사
+      if (ball.x <= 0) {
+        ball.x = 0;
+        ball.vx = -ball.vx;
+      } else if (ball.x >= maxW) {
+        ball.x = maxW;
+        ball.vx = -ball.vx;
+      }
+
+      // 상하 벽 충돌 검사
+      if (ball.y <= 0) {
+        ball.y = 0;
+        ball.vy = -ball.vy;
+      } else if (ball.y >= maxH) {
+        ball.y = maxH;
+        ball.vy = -ball.vy;
+      }
+
+      ball.cv.style.transform = 'translate3d(' + ball.x + 'px, ' + ball.y + 'px, 0)';
+
+      // 2. π 궤적 드로잉 (흰색 덮어쓰기 제거 + 0.35px 라인)
+      var ctx = ball.ctx;
+      ctx.lineWidth = 0.35;
+      ctx.strokeStyle = ball.color;
+
+      ctx.beginPath();
+      var p = point(ball.t, ball.C, ball.R);
+      ctx.moveTo(p[0], p[1]);
+
+      for (var i = 0; i < ball.PER_FRAME; i++) {
+        ball.t += ball.STEP;
+        p = point(ball.t, ball.C, ball.R);
+        ctx.lineTo(p[0], p[1]);
+      }
+      ctx.stroke();
+
+      // 한 루프 완료 시 투명하게 즉시 초기화 후 재시작
+      if (ball.t >= ball.MAX_T) {
+        ctx.clearRect(0, 0, SIZE, SIZE);
+        ball.t = 0;
+      }
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
+</body>
+</html>
