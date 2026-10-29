@@ -6,7 +6,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://uthseo9.github.io/hub/">
 <meta property="og:title" content="부산 서구 청년 정책">
-<meta property="og:description" content="내일의 더 큰 도약을 위해 청년과 함께합니다. 청년 정책 톺아보기">
+<meta property="og:description" content="내일의 더 큰 도약을 위해 청년과 함께 합니다. 청년 정책 톺아보기">
 <meta property="og:image" content="https://uthseo9.github.io/hub/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -38,20 +38,34 @@ header{
   gap:24px;
   min-height:68px;
 }
+.header-logo-link{
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+}
+.header-logo-img{
+  height:38px;
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  display:block;
+}
 
 /* ---------- 히어로 영역 ---------- */
 .hero-section{
   position:relative;
-  padding: 40px 0 32px;
+  padding: 56px 0 44px;
   overflow:hidden;
 }
+
+/* PC 내용 배열*/
 .hero-box{
   position:relative;
   z-index:2;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:28px;
+  min-height:220px;
 }
 .hero-text-area{
   display:flex;
@@ -59,6 +73,7 @@ header{
   align-items:center;
   text-align:center;
   gap:16px;
+  z-index:2;
 }
 
 .hero-badge{
@@ -75,7 +90,7 @@ header{
 
 .hero-title{
   margin:0;
-  font-size:46px;
+  font-size:52px;
   line-height:1.2;
   font-weight:800;
   letter-spacing:-0.035em;
@@ -89,6 +104,22 @@ header{
   max-width:28em;
 }
 
+/* PC 천마니배열 */
+.char-area{
+  position:absolute;
+  left:calc(50% + 220px);
+  bottom:0;
+  z-index:1;
+  display:flex;
+  align-items:flex-end;
+}
+.char-img{
+  max-width:100%;
+  max-height:210px;
+  object-fit:contain;
+  display:block;
+}
+
 /* 히어로 바운스 π 캔버스 */
 .pi-bouncing-ball{
   position:absolute;
@@ -98,29 +129,6 @@ header{
   pointer-events:none;
   z-index:1;
   filter:drop-shadow(0 3px 8px rgba(15,46,74,0.12));
-}
-
-/* 천마니 영역 */
-.char-area{
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.char-img{
-  max-width:100%;
-  max-height:220px;
-  object-fit:contain;
-  transform-origin: 35% 85%;
-  animation: waveMotion 3.8s ease-in-out infinite;
-}
-@keyframes waveMotion {
-  0%, 65%, 100% { transform: rotate(0deg); }
-  70%  { transform: rotate(5.5deg); }
-  75%  { transform: rotate(-4deg); }
-  80%  { transform: rotate(5deg); }
-  85%  { transform: rotate(-2deg); }
-  90%  { transform: rotate(0deg); }
 }
 
 /* ---------- 상단 헤더 공유 메뉴 ---------- */
@@ -210,22 +218,59 @@ header{
 
 /* ---------- 사업 카드 ---------- */
 .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.pcard{display:flex;flex-direction:column;gap:20px;padding:32px;border:1px solid #E1E7EC;border-radius:24px;background:#FFFFFF;scroll-margin-top:24px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
-.pcard:hover{border-color:#B9C8D3;transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,46,74,.07)}
+.pcard{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  padding:32px;
+  border:1px solid #E1E7EC;
+  border-radius:24px;
+  background:#FFFFFF;
+  scroll-margin-top:24px;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.pcard:hover{
+  border-color:#B9C8D3;
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(15,46,74,.07);
+}
+
+/* 카드 호버 시 타이틀 잉크 블루 색상 전환 */
+.pcard:hover .ptitle{
+  color:#103B66;
+}
+
 .ptop{display:flex;align-items:center;justify-content:space-between}
 .pnum{font-size:14px;font-weight:800;letter-spacing:.08em;color:#8394A3}
 .ptag{font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
-.t-job{background:#E6F0F8;color:#164C7E}
-.t-home{background:#E3F0E9;color:#245740}
-.t-life{background:#FBEAE2;color:#93401F}
-.t-join{background:#ECEDF6;color:#3E4270}
+
+/* [5대 카테고리 태그 색상] */
+.t-job{background:#E6F0F8;color:#164C7E}       /* 일자리·창업 (블루) */
+.t-home{background:#E3F0E9;color:#245740}      /* 주거·생활 (그린) */
+.t-edu{background:#FEF3D6;color:#8A5A00}       /* 교육·복지 (앰버/골드) */
+.t-culture{background:#FBEAE2;color:#93401F}   /* 문화·여가 (오렌지/브라운) */
+.t-join{background:#ECEDF6;color:#3E4270}      /* 사회·참여 (퍼플) */
+
 .pbody{display:flex;gap:24px;align-items:flex-start}
 .picon{flex:none;width:88px;height:88px;border-radius:24px 24px 24px 6px;display:flex;align-items:center;justify-content:center}
-.i-job{background:#E6F0F8;color:#1C5D99}
-.i-home{background:#E3F0E9;color:#2E6B52}
-.i-life{background:#FBEAE2;color:#B4502F}
-.i-join{background:#ECEDF6;color:#4B4F7A}
-.ptitle{margin:4px 0 14px;font-size:22px;font-weight:800;color:#0F2233;letter-spacing:-.02em}
+
+/* [5대 카테고리 아이콘 배경 및 색상] */
+.i-job{background:#E6F0F8;color:#1C5D99}       /* 일자리·창업 */
+.i-home{background:#E3F0E9;color:#2E6B52}      /* 주거·생활 */
+.i-edu{background:#FEF3D6;color:#B47800}       /* 교육·복지 */
+.i-culture{background:#FBEAE2;color:#B4502F}   /* 문화·여가 */
+.i-join{background:#ECEDF6;color:#4B4F7A}      /* 사회·참여 */
+
+/* 기본: 딥 네이비(#0D2033), 호버 전환 트랜지션 */
+.ptitle{
+  margin:4px 0 14px;
+  font-size:22px;
+  font-weight:800;
+  color:#0D2033;
+  letter-spacing:-.02em;
+  transition:color .2s ease;
+}
+
 .plist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .plist li{display:flex;gap:12px;font-size:16px;line-height:1.55;color:#3F4F5E}
 .plist b{flex:none;width:36px;font-weight:700;color:#0F2233}
@@ -234,18 +279,54 @@ header{
 .pbtn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:10px;background:#0F2E4A;color:#FFFFFF;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s}
 .pbtn:hover{background:#1C5D99;color:#FFFFFF}
 
-/* ---------- 모바일 반응형 ---------- */
+/* ---------- 모바일 & 태블릿 반응형 (방향 A로 자동 전환) ---------- */
+@media (max-width:1080px){
+  /* 우측 여백이 좁아지는 구간에서 캐릭터 위치 최적화 */
+  .char-area{
+    left:auto;
+    right:12px;
+  }
+}
+
 @media (max-width:900px){
+  .header-content{
+    min-height:58px;
+  }
+  .header-logo-img{
+    height:30px;
+  }
+  .hero-section{
+    padding:36px 0 24px;
+  }
+
+  /* 모바일 핵심: 방향 A(세로 1열 수직 중앙 정렬)로 완벽 전환 */
   .hero-box{
     flex-direction:column;
-    gap:20px;
+    justify-content:center;
+    align-items:center;
+    min-height:auto;
+    gap:18px;
   }
+  .hero-title{
+    font-size:36px !important;
+  }
+  .hero-desc{
+    font-size:15px;
+  }
+  .char-area{
+    position:static; /* absolute 해제하고 텍스트 하단에 안착 */
+    left:auto;
+    bottom:auto;
+    margin-top:4px;
+  }
+  .char-img{
+    max-height:165px;
+  }
+
+  /* 카드 및 본문 모바일 대응 */
   .pgrid{grid-template-columns:minmax(0,1fr)}
   .pbody{flex-direction:column;gap:16px}
   .pcard{padding:24px}
-  .hero-title{font-size:36px!important}
-  .char-img{max-height:190px}
-  .hero-section{padding:28px 0 20px}
 }
 </style>
 </head>
@@ -257,12 +338,8 @@ header{
 <!-- ===================================================== -->
 <header>
   <div class="wrap header-content">
-    <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0F2233">
-      <img src="logo.png" alt="부산광역시 서구 로고" style="width: 38px; height: 38px; object-fit: contain;">
-      <span style="display: flex; flex-direction: column; line-height: 1.15">
-        <span style="font-size: 12px; font-weight: 600; color: #4A5B6B">부산광역시 서구</span>
-        <span style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em">청년 정책</span>
-      </span>
+    <a href="#top" class="header-logo-link">
+      <img src="logo.png" alt="부산광역시 서구 로고" class="header-logo-img">
     </a>
     
     <!-- 공유 버튼 & 팝업 영역 -->
@@ -300,7 +377,7 @@ header{
 </header>
 
 <!-- ===================================================== -->
-<!-- [HERO] 중앙 정렬 텍스트 + 우측 천마니 + 바운스 π 캔버스 2개 -->
+<!-- [HERO] PC: 중앙 텍스트 + 우측 천마니 / 모바일: 수직 중앙 1열 -->
 <!-- ===================================================== -->
 <section class="hero-section" id="heroSection">
   <canvas id="piCanvasLeft" class="pi-bouncing-ball" width="46" height="46"></canvas>
@@ -308,14 +385,16 @@ header{
 
   <div class="wrap">
     <div class="hero-box">
+      <!-- 중앙 텍스트 그룹 -->
       <div class="hero-text-area">
         <span class="hero-badge">BUSAN SEO-GU YOUTH</span>
-        <h1 class="hero-title">서구 청년 정책</h1>
-        <p class="hero-desc">내일의 더 큰 도약을 위해 청년과 함께합니다.</p>
+        <h1 class="hero-title">청년 정책</h1>
+        <p class="hero-desc">내일의 더 큰 도약을 위해 청년과 함께 합니다.</p>
       </div>
 
+      <!-- 천마니 캐릭터 (PC: 우측 걸침 / 모바일: 텍스트 바로 아래 중앙) -->
       <div class="char-area">
-        <img src="01.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
+        <img src="001.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
       </div>
     </div>
   </div>
@@ -329,7 +408,7 @@ header{
     
     <div class="pgrid">
 
-      <!-- SECTION 01 -->
+      <!-- SECTION 01: 일자리·창업 -->
       <article class="pcard" id="policy-01">
         <div class="ptop"><span class="pnum">01</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
@@ -342,22 +421,22 @@ header{
           <div>
             <h3 class="ptitle">청년 창업자 임차료 지원</h3>
             <ul class="plist">
-              <li><b>대상</b>서구 거주 청년 창업자</li>
+              <li><b>대상</b>18세-39세 서구 거주 청년 창업자</li>
               <li><b>내용</b>월 최대 30만 원, 10개월 지원(본인부담 30%)</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
           <a class="pbtn" href="https://blog.naver.com/muten304/224379771136" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 02 -->
+      <!-- SECTION 02: 교육·복지 -->
       <article class="pcard" id="policy-02">
-        <div class="ptop"><span class="pnum">02</span><span class="ptag t-job">일자리·창업</span></div>
+        <div class="ptop"><span class="pnum">02</span><span class="ptag t-edu">교육·복지</span></div>
         <div class="pbody">
-          <div class="picon i-job">
+          <div class="picon i-edu">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="8" r="6"></circle>
               <polyline points="8.21 13.89 7 22 12 19 17 22 15.79 13.88"></polyline>
@@ -372,12 +451,12 @@ header{
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
           <a class="pbtn" href="https://www.bsseogu.go.kr/index.bsseogu?menuCd=DOM_000000102001005000" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 03 -->
+      <!-- SECTION 03: 일자리·창업 -->
       <article class="pcard" id="policy-03">
         <div class="ptop"><span class="pnum">03</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
@@ -390,20 +469,20 @@ header{
           <div>
             <h3 class="ptitle">청년도전 지원사업</h3>
             <ul class="plist">
-              <li><b>대상</b>쉬었음 청년</li>
+              <li><b>대상</b>19세-34세 쉬었음, 가습기 살균제 피해 청년 등</li>
               <li><b>내용</b>사회진입을 위한 프로그램, 수당 최대 220만 원 지원</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4792</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4792</span>
           <a class="pbtn" href="https://blog.naver.com/muten304/224412082364" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 04 -->
+      <!-- SECTION 04: 주거·생활 -->
       <article class="pcard" id="policy-04">
-        <div class="ptop"><span class="pnum">04</span><span class="ptag t-home">주거·자산</span></div>
+        <div class="ptop"><span class="pnum">04</span><span class="ptag t-home">주거·생활</span></div>
         <div class="pbody">
           <div class="picon i-home">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -421,14 +500,14 @@ header{
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
           <a class="pbtn" href="https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004661" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 05 -->
+      <!-- SECTION 05: 주거·생활 -->
       <article class="pcard" id="policy-05">
-        <div class="ptop"><span class="pnum">05</span><span class="ptag t-home">주거·자산</span></div>
+        <div class="ptop"><span class="pnum">05</span><span class="ptag t-home">주거·생활</span></div>
         <div class="pbody">
           <div class="picon i-home">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -438,47 +517,47 @@ header{
             </svg>
           </div>
           <div>
-            <h3 class="ptitle">청년 자산형성 지원</h3>
+            <h3 class="ptitle">청년 내일저축계좌</h3>
             <ul class="plist">
-              <li><b>대상</b>근로 중인 청년</li>
-              <li><b>내용</b>본인 저축액의 00 지원</li>
+              <li><b>대상</b>15세-39세 근로 중인 중위소득 50% 이하 청년</li>
+              <li><b>내용</b>근로소득장려금 30만 원 지원</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>생활지원과 051-240-0000</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>생활지원과 051-240-4327</span>
           <a class="pbtn" href="https://www.bsseogu.go.kr" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 06 -->
+      <!-- SECTION 06: 교육·복지 -->
       <article class="pcard" id="policy-06">
-        <div class="ptop"><span class="pnum">06</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="ptop"><span class="pnum">06</span><span class="ptag t-edu">교육·복지</span></div>
         <div class="pbody">
-          <div class="picon i-life">
+          <div class="picon i-edu">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
           </div>
           <div>
-            <h3 class="ptitle">청년 마음건강 지원</h3>
+            <h3 class="ptitle">청년 정신건강 증진</h3>
             <ul class="plist">
-              <li><b>대상</b>마음의 휴식이 필요한 서구 청년</li>
-              <li><b>내용</b>전문 심리상담 바우처 제공</li>
+              <li><b>대상</b>18세-39세 청년</li>
+              <li><b>내용</b>정신과 전문의 상담 연계, 프로그램 지원 등</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>보건행정과 051-240-0000</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>보건행정과 051-290-5221</span>
           <a class="pbtn" href="https://www.bsseogu.go.kr" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 07 -->
+      <!-- SECTION 07: 문화·여가 -->
       <article class="pcard" id="policy-07">
-        <div class="ptop"><span class="pnum">07</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="ptop"><span class="pnum">07</span><span class="ptag t-culture">문화·여가</span></div>
         <div class="pbody">
-          <div class="picon i-life">
+          <div class="picon i-culture">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"></path>
               <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -487,22 +566,22 @@ header{
           <div>
             <h3 class="ptitle">청년 공간 활성화 지원</h3>
             <ul class="plist">
-              <li><b>대상</b>서구 거주·활동 청년</li>
+              <li><b>대상</b>18세-39세 서구 거주·활동 청년</li>
               <li><b>내용</b>크루 활동, 원데이클래스 지원</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4794</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4794</span>
           <a class="pbtn" href="https://www.instagram.com/muten_304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 08 -->
+      <!-- SECTION 08: 교육·복지 -->
       <article class="pcard" id="policy-08">
-        <div class="ptop"><span class="pnum">08</span><span class="ptag t-life">생활·문화</span></div>
+        <div class="ptop"><span class="pnum">08</span><span class="ptag t-edu">교육·복지</span></div>
         <div class="pbody">
-          <div class="picon i-life">
+          <div class="picon i-edu">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
@@ -511,20 +590,20 @@ header{
           <div>
             <h3 class="ptitle">청년 도서 지원(예정)</h3>
             <ul class="plist">
-              <li><b>대상</b>서구 거주 청년</li>
+              <li><b>대상</b>18세-39세 서구 거주 청년</li>
               <li><b>내용</b>지정 도서 지원</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
           <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 09 -->
+      <!-- SECTION 09: 사회·참여 -->
       <article class="pcard" id="policy-09">
-        <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">참여·공간</span></div>
+        <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">사회·참여</span></div>
         <div class="pbody">
           <div class="picon i-join">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -537,22 +616,22 @@ header{
             </svg>
           </div>
           <div>
-            <h3 class="ptitle">서구 청년공간 무튼304 운영</h3>
+            <h3 class="ptitle">청년공간 무튼304 운영</h3>
             <ul class="plist">
-              <li><b>내용</b>청년 누구에게나 프로그램, 보드게임, 휴식 공간 지원</li>
+              <li><b>내용</b>18세-39세 청년 누구에게나 프로그램, 보드게임, 휴식 공간 지원</li>
               <li><b>위치</b>구덕로 304(3층)</li>
             </ul>
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 070-4024-0304</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 070-4024-0304</span>
           <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
-      <!-- SECTION 10 -->
+      <!-- SECTION 10: 사회·참여 -->
       <article class="pcard" id="policy-10">
-        <div class="ptop"><span class="pnum">10</span><span class="ptag t-join">참여·공간</span></div>
+        <div class="ptop"><span class="pnum">10</span><span class="ptag t-join">사회·참여</span></div>
         <div class="pbody">
           <div class="picon i-join">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -573,8 +652,29 @@ header{
           </div>
         </div>
         <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>일자리경제과 051-240-4794</span>
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4794</span>
           <a class="pbtn" href="https://blog.naver.com/PostList.naver?blogId=muten304&categoryNo=11&skinType=&skinId=&from=menu" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+   <!-- SECTION 11: 일자리·창업 -->
+      <article class="pcard" id="policy-11">
+        <div class="ptop"><span class="pnum">03</span><span class="ptag t-job">일자리·창업</span></div>
+        <div class="pbody">
+          <div class="picon i-job">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M2 6V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5V6a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0z"></path> <path d="M7 2v4M12 2v4M17 2v4"></path> <path d="M3.5 8V12.5M20.5 8V12.5"></path> <path d="M7 12.5v-2.5h2.5v2.5M12 12.5v-2.5h5v2.5"></path> <rect x="1.5" y="12.5" width="21" height="3" rx=".8"></rect> <path d="M3.5 15.5V21a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-5.5M8.5 15.5v3h7v-3"></path> </svg>
+          </div>
+          <div>
+            <h3 class="ptitle">송도청년마켓</h3>
+            <ul class="plist">
+              <li><b>대상</b>청년 작가, 셀러, 소상공인</li>
+              <li><b>내용</b>청년 셀러 판로 개척 및 경제적 자립 기반 구축 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304/224172041682" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
         </div>
       </article>
 
@@ -583,14 +683,13 @@ header{
 </section>
 
 <!-- ===================================================== -->
-<!-- [FOOTER] (주소 아래로 대표전화 2줄 분리)             -->
+<!-- [FOOTER]  -->
 <!-- ===================================================== -->
 <footer style="border-top: 1px solid #EDF1F4; background: #F5F8F9; padding: 36px 0">
   <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #4A5B6B; line-height: 1.7">
     <div>
       <strong style="color: #0F2233">부산광역시 서구 일자리경제과</strong><br>
-      49247 부산광역시 구덕로 120(토성동4가)<br>
-      대표전화 051-240-4791
+      49247 부산광역시 구덕로 120(토성동4가)
     </div>
     <div>© Busan Seo-gu. All rights reserved.</div>
   </div>
