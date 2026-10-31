@@ -2,10 +2,10 @@
 <html lang="ko">
 <head>
 
-<!-- 오픈 그래프 (Open Graph / SNS 미리보기 설정) -->
+<!-- 오픈 그래프(Open Graph / SNS 미리보기) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://uthseo9.github.io/hub/">
-<meta property="og:title" content="부산 서구 청년 정책">
+<meta property="og:title" content="부산 서구 청년정책">
 <meta property="og:description" content="내일의 더 큰 도약을 위해 청년과 함께 합니다. 청년 정책 톺아보기">
 <meta property="og:image" content="https://uthseo9.github.io/hub/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@ a{color:#1C5D99}a:hover{color:#0F2E4A}
 /* ---------- 헤더 ---------- */
 header{
   position:relative;
-  background:#FFFFFF;
+  background:#EDF4FB;
   border-bottom:1px solid #EDF1F4;
 }
 .header-content{
@@ -56,6 +56,12 @@ header{
   position:relative;
   padding: 56px 0 44px;
   overflow:hidden;
+  /* 배경 그라데이션 */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 45%, #FFFFFF 100%),
+    radial-gradient(520px 320px at calc(50% + 367px) 55%, rgba(42,157,143,.07), transparent 70%),
+    radial-gradient(420px 300px at calc(50% - 367px) 55%, rgba(47,111,176,.06), transparent 70%),
+    linear-gradient(180deg, #EDF4FB 0%, #F6FAFD 50%, #FFFFFF 100%);
 }
 
 /* PC 내용 배열*/
@@ -120,15 +126,132 @@ header{
   display:block;
 }
 
-/* 히어로 바운스 π 캔버스 */
-.pi-bouncing-ball{
+/* ---------- π 궤도 캔버스 ---------- */
+.orbit{
   position:absolute;
-  width:46px;
-  height:46px;
-  border-radius:50%;
+  z-index:0;
   pointer-events:none;
-  z-index:1;
-  filter:drop-shadow(0 3px 8px rgba(15,46,74,0.12));
+  aspect-ratio:1/1;
+}
+.orbit--left{ width:220px; left:calc(50% - 477px); top:74px; }
+.orbit--right{ width:280px; left:calc(50% + 227px); bottom:-4px; }
+
+/* ---------- 천마니 및 계절 스티커 ---------- */
+.char-stage{position:relative;display:block;line-height:0;isolation:isolate}
+.char-stage .char-img{position:relative;z-index:1}
+.season-sticker{
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  height:auto;
+  filter:drop-shadow(0 2px 3px rgba(15,34,51,.12));
+  transform-origin:50% 50%;
+}
+.season-sticker--spring{
+  width:21%; left:59%; top:9%;
+  z-index:0;
+  transform-origin:50% 88%;
+  animation:st-sprout-pop .7s cubic-bezier(.3,1.6,.5,1) both, st-sway 3.6s ease-in-out .7s infinite;
+}
+.season-sticker--summer{
+  width:21%; left:24%; top:84%;
+  animation:st-pop-wave .6s cubic-bezier(.3,1.6,.5,1) both, st-wave 3s ease-in-out .6s infinite;
+}
+.season-sticker--autumn{
+  width:17%; left:28%; top:34%;
+  animation:st-leaf-loop 6.4s cubic-bezier(.25,.6,.3,1) .3s infinite both;
+}
+.season-sticker--winter{
+  width:24%; left:53%; top:-5%;
+  transform-origin:30% 80%;
+  animation:st-pop-hat .6s cubic-bezier(.3,1.6,.5,1) both, st-hat 3.6s ease-in-out .6s infinite;
+}
+.season-sticker--january{
+  width:34%; left:-12%; top:-24%;
+  z-index:2;
+  transform-origin:50% 44%;
+  animation:st-pop-kite .6s cubic-bezier(.3,1.6,.5,1) both, st-kite 3.2s ease-in-out .6s infinite;
+}
+.kite-string{
+  position:absolute; inset:0; width:100%; height:100%;
+  overflow:visible; z-index:0;
+  pointer-events:none;
+}
+.kite-string path{
+  fill:none; stroke:#3B4A5A; stroke-opacity:.55; stroke-width:1.3;
+  stroke-linecap:round; vector-effect:non-scaling-stroke;
+}
+.season-sticker--february{
+  width:22%; left:54%; top:84%;
+  transform-origin:50% 35%;
+  animation:st-pop-pouch .6s cubic-bezier(.3,1.6,.5,1) both, st-pouch 2.6s ease-in-out .6s infinite;
+}
+
+@keyframes st-pop-kite{
+  from{transform:scale(0) rotate(-12deg);opacity:0}
+  to{transform:scale(1) rotate(-12deg);opacity:1}
+}
+@keyframes st-kite{
+  0%,100%{transform:rotate(-12deg) translate(0,0)}
+  30%    {transform:rotate(-4deg) translate(3%,-3%)}
+  60%    {transform:rotate(-18deg) translate(-2%,-5%)}
+  80%    {transform:rotate(-9deg) translate(1%,-1%)}
+}
+@keyframes st-pop-pouch{
+  from{transform:scale(0) rotate(0deg);opacity:0}
+  to{transform:scale(1) rotate(0deg);opacity:1}
+}
+@keyframes st-pouch{
+  0%,100%{transform:rotate(0deg)}
+  25%    {transform:rotate(12deg)}
+  50%    {transform:rotate(-2deg)}
+  75%    {transform:rotate(-10deg)}
+}
+@keyframes st-pop-wave{
+  from{transform:scale(0) rotate(-6deg);opacity:0}
+  to{transform:scale(1) rotate(-6deg);opacity:1}
+}
+@keyframes st-pop-hat{
+  from{transform:scale(0) rotate(31deg);opacity:0}
+  to{transform:scale(1) rotate(31deg);opacity:1}
+}
+@keyframes st-sprout-pop{
+  from{transform:scale(0) rotate(20deg);opacity:0}
+  to{transform:scale(1) rotate(20deg);opacity:1}
+}
+@keyframes st-sway{
+  0%,100%{transform:rotate(20deg)}
+  30%    {transform:rotate(30deg)}
+  60%    {transform:rotate(15deg)}
+  78%    {transform:rotate(22deg) scale(1.06,.93)}
+  86%    {transform:rotate(21deg) scale(.97,1.04)}
+}
+@keyframes st-wave{
+  0%,100%{transform:translate(0,0) rotate(-6deg)}
+  25%    {transform:translate(5%,-7%) rotate(3deg)}
+  50%    {transform:translate(0,-2%) rotate(-10deg)}
+  75%    {transform:translate(-5%,-7%) rotate(-1deg)}
+}
+@keyframes st-hat{
+  0%,100%{transform:translateY(0) rotate(31deg)}
+  35%    {transform:translateY(-6%) rotate(37deg)}
+  55%    {transform:translateY(-6%) rotate(27deg)}
+  75%    {transform:translateY(-3%) rotate(33deg)}
+}
+@keyframes st-leaf-loop{
+  0%  {transform:translate(420%,-260%) rotate(-160deg) scale(.8);opacity:0}
+  5%  {opacity:1}
+  13% {transform:translate(260%,-60%) rotate(-40deg) scale(.9)}
+  21% {transform:translate(140%,-170%) rotate(80deg) scale(.95)}
+  29% {transform:translate(40%,-40%) rotate(10deg) scale(1)}
+  33% {transform:translate(0,0) rotate(-14deg) scale(1.22,.82)}
+  36% {transform:translate(0,0) rotate(-14deg) scale(.94,1.06)}
+  39% {transform:translate(0,0) rotate(-14deg) scale(1)}
+  60% {transform:translate(0,0) rotate(-18deg) scale(1)}
+  64% {transform:translate(0,0) rotate(-9deg) scale(1)}
+  86% {transform:translate(0,0) rotate(-14deg) scale(1);opacity:1}
+  90% {transform:translate(-30%,-25%) rotate(-50deg) scale(1)}
+  100%{transform:translate(-320%,-180%) rotate(-220deg) scale(.8);opacity:0}
 }
 
 /* ---------- 상단 헤더 공유 메뉴 ---------- */
@@ -235,16 +358,14 @@ header{
   box-shadow:0 12px 32px rgba(15,46,74,.07);
 }
 
-/* 카드 호버 시 타이틀 잉크 블루 색상 전환 */
 .pcard:hover .ptitle{
-  color:#103B66;
+  color:#003333;
 }
 
 .ptop{display:flex;align-items:center;justify-content:space-between}
 .pnum{font-size:14px;font-weight:800;letter-spacing:.08em;color:#8394A3}
 .ptag{font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
 
-/* [5대 카테고리 태그 색상] */
 .t-job{background:#E6F0F8;color:#164C7E}       /* 일자리·창업 (블루) */
 .t-home{background:#E3F0E9;color:#245740}      /* 주거·생활 (그린) */
 .t-edu{background:#FEF3D6;color:#8A5A00}       /* 교육·복지 (앰버/골드) */
@@ -254,14 +375,12 @@ header{
 .pbody{display:flex;gap:24px;align-items:flex-start}
 .picon{flex:none;width:88px;height:88px;border-radius:24px 24px 24px 6px;display:flex;align-items:center;justify-content:center}
 
-/* [5대 카테고리 아이콘 배경 및 색상] */
 .i-job{background:#E6F0F8;color:#1C5D99}       /* 일자리·창업 */
 .i-home{background:#E3F0E9;color:#2E6B52}      /* 주거·생활 */
 .i-edu{background:#FEF3D6;color:#B47800}       /* 교육·복지 */
 .i-culture{background:#FBEAE2;color:#B4502F}   /* 문화·여가 */
 .i-join{background:#ECEDF6;color:#4B4F7A}      /* 사회·참여 */
 
-/* 기본: 딥 네이비(#0D2033), 호버 전환 트랜지션 */
 .ptitle{
   margin:4px 0 14px;
   font-size:22px;
@@ -279,13 +398,15 @@ header{
 .pbtn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:10px;background:#0F2E4A;color:#FFFFFF;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s}
 .pbtn:hover{background:#1C5D99;color:#FFFFFF}
 
-/* ---------- 모바일 & 태블릿 반응형 (방향 A로 자동 전환) ---------- */
+/* ---------- 모바일 & 태블릿 반응형 ---------- */
 @media (max-width:1080px){
-  /* 우측 여백이 좁아지는 구간에서 캐릭터 위치 최적화 */
   .char-area{
     left:auto;
     right:12px;
   }
+  .hero-section{background:linear-gradient(180deg,#EDF4FB 0%,#F6FAFD 50%,#FFFFFF 100%)}
+  .orbit--left{left:49px}
+  .orbit--right{left:auto;right:19px}
 }
 
 @media (max-width:900px){
@@ -296,10 +417,9 @@ header{
     height:30px;
   }
   .hero-section{
-    padding:36px 0 24px;
+    padding:36px 0 40px; /* 파도 스티커 여백 */
   }
 
-  /* 모바일 핵심: 방향 A(세로 1열 수직 중앙 정렬)로 완벽 전환 */
   .hero-box{
     flex-direction:column;
     justify-content:center;
@@ -314,7 +434,7 @@ header{
     font-size:15px;
   }
   .char-area{
-    position:static; /* absolute 해제하고 텍스트 하단에 안착 */
+    position:static;
     left:auto;
     bottom:auto;
     margin-top:4px;
@@ -322,6 +442,11 @@ header{
   .char-img{
     max-height:165px;
   }
+
+  /* 모바일: 천마니 원주율 애니 */
+  .orbit--left{width:150px;left:-46px;top:-46px}
+  .orbit--right{display:none}
+  .season-sticker--january{width:28%; left:-16%; top:-10%}
 
   /* 카드 및 본문 모바일 대응 */
   .pgrid{grid-template-columns:minmax(0,1fr)}
@@ -380,8 +505,9 @@ header{
 <!-- [HERO] PC: 중앙 텍스트 + 우측 천마니 / 모바일: 수직 중앙 1열 -->
 <!-- ===================================================== -->
 <section class="hero-section" id="heroSection">
-  <canvas id="piCanvasLeft" class="pi-bouncing-ball" width="46" height="46"></canvas>
-  <canvas id="piCanvasRight" class="pi-bouncing-ball" width="34" height="34"></canvas>
+  <!-- 좌우 대칭 원주율 궤도-->
+  <canvas class="orbit orbit--left"  data-hue="214,190" data-delay="3"  aria-hidden="true"></canvas>
+  <canvas class="orbit orbit--right" data-hue="196,158" data-delay="0"  aria-hidden="true"></canvas>
 
   <div class="wrap">
     <div class="hero-box">
@@ -392,16 +518,18 @@ header{
         <p class="hero-desc">내일의 더 큰 도약을 위해 청년과 함께 합니다.</p>
       </div>
 
-      <!-- 천마니 캐릭터 (PC: 우측 걸침 / 모바일: 텍스트 바로 아래 중앙) -->
+      <!-- 천마니 캐릭터 & 월별 계절 스티커-->
       <div class="char-area">
-        <img src="001.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
+        <span class="char-stage" id="charStage">
+          <img src="001.gif" alt="인사하는 서구 마스코트 천마니" class="char-img">
+        </span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================================================== -->
-<!-- [MAP] 사업 목록 -->
+<!-- [MAP] 사업 목록                                       -->
 <!-- ===================================================== -->
 <section id="roadmap" style="padding: 48px 0 88px">
   <div class="wrap">
@@ -577,33 +705,9 @@ header{
         </div>
       </article>
 
-      <!-- SECTION 08: 교육·복지 -->
+      <!-- SECTION 08: 사회·참여 -->
       <article class="pcard" id="policy-08">
-        <div class="ptop"><span class="pnum">08</span><span class="ptag t-edu">교육·복지</span></div>
-        <div class="pbody">
-          <div class="picon i-edu">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-            </svg>
-          </div>
-          <div>
-            <h3 class="ptitle">청년 도서 지원(예정)</h3>
-            <ul class="plist">
-              <li><b>대상</b>18세-39세 서구 거주 청년</li>
-              <li><b>내용</b>지정 도서 지원</li>
-            </ul>
-          </div>
-        </div>
-        <div class="pfoot">
-          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
-          <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
-        </div>
-      </article>
-
-      <!-- SECTION 09: 사회·참여 -->
-      <article class="pcard" id="policy-09">
-        <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">사회·참여</span></div>
+        <div class="ptop"><span class="pnum">08</span><span class="ptag t-join">사회·참여</span></div>
         <div class="pbody">
           <div class="picon i-join">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -629,9 +733,9 @@ header{
         </div>
       </article>
 
-      <!-- SECTION 10: 사회·참여 -->
-      <article class="pcard" id="policy-10">
-        <div class="ptop"><span class="pnum">10</span><span class="ptag t-join">사회·참여</span></div>
+      <!-- SECTION 09: 사회·참여 -->
+      <article class="pcard" id="policy-09">
+        <div class="ptop"><span class="pnum">09</span><span class="ptag t-join">사회·참여</span></div>
         <div class="pbody">
           <div class="picon i-join">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -657,9 +761,9 @@ header{
         </div>
       </article>
 
-   <!-- SECTION 11: 일자리·창업 -->
-      <article class="pcard" id="policy-11">
-        <div class="ptop"><span class="pnum">11</span><span class="ptag t-job">일자리·창업</span></div>
+      <!-- SECTION 10: 일자리·창업 -->
+      <article class="pcard" id="policy-10">
+        <div class="ptop"><span class="pnum">10</span><span class="ptag t-job">일자리·창업</span></div>
         <div class="pbody">
           <div class="picon i-job">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M2 6V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5V6a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0a2.5 2 0 0 1-5 0z"></path> <path d="M7 2v4M12 2v4M17 2v4"></path> <path d="M3.5 8V12.5M20.5 8V12.5"></path> <path d="M7 12.5v-2.5h2.5v2.5M12 12.5v-2.5h5v2.5"></path> <rect x="1.5" y="12.5" width="21" height="3" rx=".8"></rect> <path d="M3.5 15.5V21a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-5.5M8.5 15.5v3h7v-3"></path> </svg>
@@ -678,11 +782,11 @@ header{
         </div>
       </article>
 
-<!-- SECTION 12: 교육·복지 -->
-      <article class="pcard" id="policy-12">
-        <div class="ptop"><span class="pnum">12</span><span class="ptag t-edu">교육·복지</span></div>
+      <!-- SECTION 11: 교육·복지 -->
+      <article class="pcard" id="policy-11">
+        <div class="ptop"><span class="pnum">11</span><span class="ptag t-edu">교육·복지</span></div>
         <div class="pbody">
-         <div class="picon i-edu"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <!-- 칠판: 흰색 채움 --> <rect x="7.5" y="2" width="15" height="9.5" rx="1.5" fill="#FFFFFF"></rect> <path d="M10.5 4.8h3M10.5 7.8h8.5"></path> <path d="M6.2 12L14 6"></path> <!-- 머리 --> <circle cx="3.5" cy="8.6" r="1.4"></circle> <circle cx="8" cy="16.9" r="1.3"></circle> <circle cx="14" cy="16.9" r="1.3"></circle> <circle cx="20" cy="16.9" r="1.3"></circle> <!-- 몸통: 선만 --> <path d="M1 14.5V13a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.5"></path> <path d="M5.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M11.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M17.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> </svg> </div>
+          <div class="picon i-edu"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="7.5" y="2" width="15" height="9.5" rx="1.5" fill="#FFFFFF"></rect> <path d="M10.5 4.8h3M10.5 7.8h8.5"></path> <path d="M6.2 12L14 6"></path> <circle cx="3.5" cy="8.6" r="1.4"></circle> <circle cx="8" cy="16.9" r="1.3"></circle> <circle cx="14" cy="16.9" r="1.3"></circle> <circle cx="20" cy="16.9" r="1.3"></circle> <path d="M1 14.5V13a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.5"></path> <path d="M5.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M11.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M17.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> </svg> </div>
           <div>
             <h3 class="ptitle">청년 맞춤 클래스</h3>
             <ul class="plist">
@@ -697,12 +801,55 @@ header{
         </div>
       </article>
 
-    </div>
-  </div>
+       <!-- SECTION 12: 문화·여가 -->
+      <article class="pcard" id="policy-12">
+        <div class="ptop"><span class="pnum">12</span><span class="ptag t-culture">문화·여가</span></div>
+        <div class="pbody">
+          <div class="picon i-culture">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="ptitle">청년 도서 지원(예정)</h3>
+            <ul class="plist">
+              <li><b>대상</b>18세-39세 서구 거주 청년</li>
+              <li><b>내용</b>지정 도서 지원</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+      <!-- SECTION 13: 교육·복지 -->
+      <article class="pcard" id="policy-13">
+        <div class="ptop"><span class="pnum">13</span><span class="ptag t-edu">교육·복지</span></div>
+        <div class="pbody">
+          <div class="picon i-edu"> <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="7.5" y="2" width="15" height="9.5" rx="1.5" fill="#FFFFFF"></rect> <path d="M10.5 4.8h3M10.5 7.8h8.5"></path> <path d="M6.2 12L14 6"></path> <circle cx="3.5" cy="8.6" r="1.4"></circle> <circle cx="8" cy="16.9" r="1.3"></circle> <circle cx="14" cy="16.9" r="1.3"></circle> <circle cx="20" cy="16.9" r="1.3"></circle> <path d="M1 14.5V13a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.5"></path> <path d="M5.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M11.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> <path d="M17.5 22.5v-1.2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1.2"></path> </svg> </div>
+          <div>
+            <h3 class="ptitle">청년 지원 사업명 기재(예정)</h3>
+            <ul class="plist">
+              <li><b>대상</b>18세-39세 서구 전입 청년</li>
+              <li><b>내용</b>지원안내사항기재</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pfoot">
+          <span class="ptel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2-2"></path></svg>일자리경제과 051-240-4791</span>
+          <a class="pbtn" href="https://blog.naver.com/muten304" target="_blank" rel="noopener">바로가기<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </article>
+
+     </div>
+   </div>
 </section>
 
 <!-- ===================================================== -->
-<!-- [FOOTER]  -->
+<!-- [FOOTER]                                             -->
 <!-- ===================================================== -->
 <footer style="border-top: 1px solid #EDF1F4; background: #F5F8F9; padding: 36px 0">
   <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #4A5B6B; line-height: 1.7">
@@ -887,112 +1034,210 @@ function fallbackCopyText(text) {
 }
 </script>
 
-<!-- π 패턴 애니메이션 (흰색 잔상 제거 + 0.35px 라인) -->
+<!-- ===== π 궤도 애니메이션 스크립트 ===== -->
 <script>
 (function () {
-  var hero = document.getElementById('heroSection');
-  if (!hero) return;
+  var els = document.querySelectorAll('.orbit');
+  if (!els.length) return;
+  var reduce = false;
 
-  var SIZE = 48; // 공 직경
-  var dpr = window.devicePixelRatio || 1;
+  var MAX_T   = 300;
+  var SUB     = 0.01;
+  var V0      = 0.022, V1 = 0.14;
+  var TAIL    = 140;
+  var HOLD    = 3.2;
+  var FADE    = 1.6;
 
-  var balls = [
-    {
-      id: 'piCanvasLeft',
-      color: 'hsla(158, 70%, 36%, 0.85)', // 그린
-      x: 40,
-      y: 40,
-      vx: 1.5,
-      vy: 1.2
-    },
-    {
-      id: 'piCanvasRight',
-      color: 'hsla(212, 75%, 40%, 0.85)', // 블루
-      x: 240,
-      y: 80,
-      vx: -1.4,
-      vy: 1.3
-    }
-  ];
+  function P(t, R, C) {
+    return [C + (Math.cos(t) + Math.cos(Math.PI * t)) * R,
+            C + (Math.sin(t) + Math.sin(Math.PI * t)) * R];
+  }
+  function hsl(h, a) { return 'hsla(' + h.toFixed(1) + ',58%,42%,' + a + ')'; }
 
-  balls.forEach(function (ball) {
-    var cv = document.getElementById(ball.id);
-    if (!cv) return;
-    var ctx = cv.getContext('2d');
-    cv.width = SIZE * dpr;
-    cv.height = SIZE * dpr;
-    ctx.scale(dpr, dpr);
-
-    ball.cv = cv;
-    ball.ctx = ctx;
-    ball.t = 0;
-    ball.MAX_T = 380;
-    ball.STEP = 0.045;
-    ball.PER_FRAME = 32;
-    ball.R = SIZE / 2 - 2;
-    ball.C = SIZE / 2;
+  var L = [];
+  els.forEach(function (el) {
+    var hue = (el.getAttribute('data-hue') || '210,160').split(',').map(Number);
+    L.push({ el: el, h0: hue[0], h1: hue[1], delay0: +(el.getAttribute('data-delay') || 0) });
   });
 
-  function point(th, C, R) {
-    return [
-      C + (Math.cos(th) + Math.cos(Math.PI * th)) * (R / 2),
-      C + (Math.sin(th) + Math.sin(Math.PI * th)) * (R / 2)
-    ];
+  function setup(o) {
+    var s = o.el.clientWidth;
+    o.size = s;
+    if (!s) return;
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    o.el.width = o.el.height = s * d;
+    o.ctx = o.el.getContext('2d');
+    o.trace = document.createElement('canvas');
+    o.trace.width = o.trace.height = s * d;
+    o.tctx = o.trace.getContext('2d');
+    o.tctx.setTransform(d, 0, 0, d, 0, 0);
+    o.tctx.lineCap = o.tctx.lineJoin = 'round';
+    o.d = d; o.R = s * 0.235; o.C = s / 2;
+    reset(o);
+    o.delay = o.delay0;
+    if (reduce) { o.t = MAX_T; drawTrace(o, 0, MAX_T); o.phase = 'hold'; render(o, 1); }
+  }
+  function reset(o) {
+    o.t = 0; o.phase = 'draw'; o.timer = 0; o.tail = [];
+    o.tctx.clearRect(0, 0, o.size, o.size);
+  }
+  function hueAt(o, t) { return o.h0 + (o.h1 - o.h0) * Math.min(1, t / MAX_T); }
+
+  function drawTrace(o, a, b) {
+    var c = o.tctx, p = P(a, o.R, o.C);
+    c.strokeStyle = hsl(hueAt(o, b), 0.13);
+    c.lineWidth = 0.9;
+    c.beginPath(); c.moveTo(p[0], p[1]);
+    for (var t = a + SUB; t <= b; t += SUB) { p = P(t, o.R, o.C); c.lineTo(p[0], p[1]); }
+    c.stroke();
   }
 
-  function animate() {
-    var maxW = hero.clientWidth - SIZE;
-    var maxH = hero.clientHeight - SIZE;
+  function render(o, armAlpha, traceAlpha) {
+    var c = o.ctx, s = o.size, d = o.d, R = o.R, C = o.C;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.clearRect(0, 0, o.el.width, o.el.height);
+    c.setTransform(d, 0, 0, d, 0, 0);
 
-    balls.forEach(function (ball) {
-      if (!ball.cv) return;
+    c.save();
+    c.globalAlpha = (traceAlpha == null ? 1 : traceAlpha);
+    c.drawImage(o.trace, 0, 0, s, s);
+    c.restore();
 
-      ball.x += ball.vx;
-      ball.y += ball.vy;
+    if (armAlpha <= 0 || !o.tail.length) return;
+    c.save();
+    c.globalAlpha = armAlpha;
 
-      if (ball.x <= 0) {
-        ball.x = 0;
-        ball.vx = -ball.vx;
-      } else if (ball.x >= maxW) {
-        ball.x = maxW;
-        ball.vx = -ball.vx;
-      }
+    var n = o.tail.length;
+    c.lineCap = 'round'; c.lineWidth = 1.4;
+    for (var i = 1; i < n; i++) {
+      var k = i / n;
+      c.strokeStyle = hsl(hueAt(o, o.t), (k * k * 0.9).toFixed(3));
+      c.beginPath(); c.moveTo(o.tail[i - 1][0], o.tail[i - 1][1]); c.lineTo(o.tail[i][0], o.tail[i][1]); c.stroke();
+    }
 
-      if (ball.y <= 0) {
-        ball.y = 0;
-        ball.vy = -ball.vy;
-      } else if (ball.y >= maxH) {
-        ball.y = maxH;
-        ball.vy = -ball.vy;
-      }
+    c.restore();
+  }
 
-      ball.cv.style.transform = 'translate3d(' + ball.x + 'px, ' + ball.y + 'px, 0)';
+  var last = 0;
+  function tick(now) {
+    var dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
+    last = now;
+    L.forEach(function (o) {
+      if (!o.size) return;
+      if (o.delay > 0) { o.delay -= dt; render(o, 0); return; }
 
-      var ctx = ball.ctx;
-      ctx.lineWidth = 0.35;
-      ctx.strokeStyle = ball.color;
-
-      ctx.beginPath();
-      var p = point(ball.t, ball.C, ball.R);
-      ctx.moveTo(p[0], p[1]);
-
-      for (var i = 0; i < ball.PER_FRAME; i++) {
-        ball.t += ball.STEP;
-        p = point(ball.t, ball.C, ball.R);
-        ctx.lineTo(p[0], p[1]);
-      }
-      ctx.stroke();
-
-      if (ball.t >= ball.MAX_T) {
-        ctx.clearRect(0, 0, SIZE, SIZE);
-        ball.t = 0;
+      if (o.phase === 'draw') {
+        var v = (V0 + (V1 - V0) * Math.min(1, o.t / 70)) * dt * 60;
+        var a = o.t, b = Math.min(MAX_T, o.t + v);
+        drawTrace(o, a, b);
+        for (var t = a; t < b; t += SUB) {
+          o.tail.push(P(t, o.R, o.C));
+          if (o.tail.length > TAIL) o.tail.shift();
+        }
+        o.t = b;
+        render(o, Math.min(1, o.t / 0.6));
+        if (o.t >= MAX_T) { o.phase = 'hold'; o.timer = 0; }
+      } else if (o.phase === 'hold') {
+        o.timer += dt;
+        render(o, Math.max(0, 1 - o.timer / 0.8));
+        if (o.timer >= HOLD) { o.phase = 'fade'; o.timer = 0; }
+      } else {
+        o.timer += dt;
+        render(o, 0, Math.max(0, 1 - o.timer / FADE));
+        if (o.timer >= FADE) reset(o);
       }
     });
-
-    requestAnimationFrame(animate);
+    requestAnimationFrame(tick);
   }
 
-  animate();
+  L.forEach(setup);
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      L.forEach(function (o) {
+        if (o.el.clientWidth !== o.size) { setup(o); if (o.size && !reduce) o.delay = 0; }
+      });
+    }, 150);
+  });
+  if (!reduce) requestAnimationFrame(tick);
+})();
+</script>
+
+<!-- ===== 월별 계절 스티커 스크립트 ===== -->
+<script>
+(function () {
+  var stage = document.getElementById('charStage');
+  if (!stage) return;
+
+  var SRC = {
+    "january": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%0A%3Cpath d=%22M170,346 C146,388 194,420 158,456 C146,480 182,496 170,508%22 fill=%22none%22 stroke=%22%23F2C230%22 stroke-width=%2213%22 stroke-linecap=%22round%22%3E%3Canimate attributeName=%22d%22 dur=%221.5s%22 begin=%220s%22 repeatCount=%22indefinite%22 values=%22M170,346 C146,388 194,420 158,456 C146,480 182,496 170,508;M170,346 C194,388 146,420 182,456 C194,480 158,496 170,508;M170,346 C146,388 194,420 158,456 C146,480 182,496 170,508%22/%3E%3C/path%3E%3Cpath d=%22M214,346 C192,388 236,420 203,456 C192,480 225,496 214,508%22 fill=%22none%22 stroke=%22%232F6FD6%22 stroke-width=%2213%22 stroke-linecap=%22round%22%3E%3Canimate attributeName=%22d%22 dur=%221.5s%22 begin=%22-0.4s%22 repeatCount=%22indefinite%22 values=%22M214,346 C192,388 236,420 203,456 C192,480 225,496 214,508;M214,346 C236,388 192,420 225,456 C236,480 203,496 214,508%22/%3E%3C/path%3E%3Cpath d=%22M298,346 C276,388 320,420 287,456 C276,480 309,496 298,508%22 fill=%22none%22 stroke=%22%23E53935%22 stroke-width=%2213%22 stroke-linecap=%22round%22%3E%3Canimate attributeName=%22d%22 dur=%221.5s%22 begin=%22-0.8s%22 repeatCount=%22indefinite%22 values=%22M298,346 C276,388 320,420 287,456 C276,480 309,496 298,508;M298,346 C320,388 276,420 309,456 C320,480 287,496 298,508%22/%3E%3C/path%3E%3Cpath d=%22M342,346 C318,388 366,420 330,456 C318,480 354,496 342,508%22 fill=%22none%22 stroke=%22%239BD13C%22 stroke-width=%2213%22 stroke-linecap=%22round%22%3E%3Canimate attributeName=%22d%22 dur=%221.5s%22 begin=%22-0.2s%22 repeatCount=%22indefinite%22 values=%22M342,346 C318,388 366,420 330,456 C318,480 354,496 342,508;M342,346 C366,388 318,420 354,456 C366,480 330,496 342,508;M342,346 C318,388 366,420 330,456 C318,480 354,496 342,508%22/%3E%3C/path%3E%0A%3CclipPath id=%22kb%22%3E%3Crect x=%22146%22 y=%2256%22 width=%22220%22 height=%22290%22 rx=%228%22/%3E%3C/clipPath%3E%0A%3Cg clip-path=%22url%28%23kb%29%22%3E%0A%3Crect x=%22146%22 y=%2256%22 width=%22220%22 height=%22290%22 fill=%22%23FFFFFF%22/%3E%0A%3Cpath d=%22M146,56 L256,226 L146,226 Z%22 fill=%22%233DAA4E%22/%3E%0A%3Cpath d=%22M366,56 L256,226 L366,226 Z%22 fill=%22%233DAA4E%22/%3E%0A%3Cpath d=%22M146,226 L256,226 L146,346 Z%22 fill=%22%23E23B3B%22/%3E%0A%3Cpath d=%22M366,226 L256,226 L366,346 Z%22 fill=%22%23E23B3B%22/%3E%0A%3Cpath d=%22M146,346 L256,226 L256,346 Z%22 fill=%22%23F5C623%22/%3E%0A%3Cpath d=%22M366,346 L256,226 L256,346 Z%22 fill=%22%232F5FD0%22/%3E%0A%3C/g%3E%0A%3Cg transform=%22translate%28256,128%29%22%3E%0A%3Ccircle r=%2236%22 fill=%22%232F5FD0%22/%3E%0A%3Cpath d=%22M-36,0 A36,36 0 0 1 36,0 A18,18 0 0 0 0,0 A18,18 0 0 1 -36,0 Z%22 fill=%22%23E23B3B%22/%3E%0A%3C/g%3E%0A%3Ccircle cx=%22256%22 cy=%22226%22 r=%2230%22 fill=%22%23F4EBD6%22/%3E%0A%3Cg stroke=%22%239C7A4A%22 stroke-width=%223%22 fill=%22none%22 opacity=%22.75%22%3E%0A%3Ccircle cx=%22256%22 cy=%22226%22 r=%2230%22/%3E%0A%3Cpath d=%22M256,256 V346 M146,226 H226 M286,226 H366%22/%3E%0A%3C/g%3E%0A%3C/g%3E%3C/svg%3E",
+    "february": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%3Cg transform=%22translate%280,-38%29%22%3E%0A%3CclipPath id=%22pb%22%3E%3Cpath d=%22M174,216 C112,250 94,320 104,374 C118,440 186,474 256,474 C326,474 394,440 408,374 C418,320 400,250 338,216 Z%22/%3E%3C/clipPath%3E%0A%3Cpath d=%22M174,216 C112,250 94,320 104,374 C118,440 186,474 256,474 C326,474 394,440 408,374 C418,320 400,250 338,216 Z%22 fill=%22%23E2333F%22/%3E%0A%3Cg clip-path=%22url%28%23pb%29%22%3E%0A%3Crect x=%22214%22 y=%22216%22 width=%2228%22 height=%22120%22 fill=%22%233BD13A%22/%3E%0A%3Crect x=%22242%22 y=%22216%22 width=%2228%22 height=%22120%22 fill=%22%23E82EC0%22/%3E%0A%3Crect x=%22270%22 y=%22216%22 width=%2228%22 height=%22120%22 fill=%22%23F49A1E%22/%3E%0A%3Cg fill=%22none%22 stroke-width=%2222%22%3E%0A%3Ccircle cx=%22112%22 cy=%22500%22 r=%22104%22 stroke=%22%232433E8%22/%3E%3Ccircle cx=%22112%22 cy=%22500%22 r=%2282%22 stroke=%22%231FE0E8%22/%3E%3Ccircle cx=%22112%22 cy=%22500%22 r=%2260%22 stroke=%22%23E82EC0%22/%3E%0A%3Ccircle cx=%22256%22 cy=%22512%22 r=%22104%22 stroke=%22%23F49A1E%22/%3E%3Ccircle cx=%22256%22 cy=%22512%22 r=%2282%22 stroke=%22%23D7EE4A%22/%3E%3Ccircle cx=%22256%22 cy=%22512%22 r=%2260%22 stroke=%22%23E9F7B0%22/%3E%0A%3Ccircle cx=%22400%22 cy=%22500%22 r=%22104%22 stroke=%22%23FFFFFF%22/%3E%3Ccircle cx=%22400%22 cy=%22500%22 r=%2282%22 stroke=%22%23F06AC0%22/%3E%3Ccircle cx=%22400%22 cy=%22500%22 r=%2260%22 stroke=%22%23FFFFFF%22/%3E%0A%3C/g%3E%0A%3Cpath d=%22M136,300 Q128,350 150,392%22 fill=%22none%22 stroke=%22%23FF7A86%22 stroke-width=%2212%22 stroke-linecap=%22round%22 opacity=%22.7%22/%3E%0A%3C/g%3E%0A%3Crect x=%22198%22 y=%22270%22 width=%22116%22 height=%22104%22 rx=%2234%22 fill=%22%23FBE6BE%22/%3E%0A%3Cg stroke=%22%234A2418%22 stroke-width=%229%22 stroke-linecap=%22round%22 fill=%22none%22%3E%0A%3Cpath d=%22M233,286 V310 M279,286 V310 M233,298 H279 M233,310 H279%22/%3E%0A%3Cpath d=%22M256,312 V324 M226,326 H286%22/%3E%0A%3Cpath d=%22M233,340 H279 V358%22/%3E%0A%3C/g%3E%0A%3Cpath d=%22M180,218 C150,206 146,164 182,160 C186,124 224,116 240,140 C248,120 264,120 272,140 C288,116 326,124 330,160 C366,164 362,206 332,218 Z%22 fill=%22%23B81F2A%22/%3E%0A%3Cpath d=%22M188,176 C192,160 206,152 220,156%22 fill=%22none%22 stroke=%22%23E0505B%22 stroke-width=%229%22 stroke-linecap=%22round%22/%3E%0A%3Crect x=%22166%22 y=%22206%22 width=%22180%22 height=%2224%22 rx=%2212%22 fill=%22%23F7D21C%22/%3E%0A%3Cg fill=%22none%22 stroke=%22%23F7D21C%22 stroke-width=%229%22 stroke-linecap=%22round%22%3E%0A%3Cpath d=%22M256,224 C250,236 242,244 234,250%22/%3E%3Cpath d=%22M256,224 C262,236 270,244 278,250%22/%3E%0A%3C/g%3E%0A%3Ccircle cx=%22233%22 cy=%22251%22 r=%226%22 fill=%22%2328B6E8%22/%3E%3Ccircle cx=%22279%22 cy=%22251%22 r=%226%22 fill=%22%2328B6E8%22/%3E%0A%3Ccircle cx=%22256%22 cy=%22218%22 r=%2215%22 fill=%22%23F2B90C%22/%3E%3Ccircle cx=%22252%22 cy=%22214%22 r=%225%22 fill=%22%23FFF3A6%22/%3E%0A%3C/g%3E%0A%3C/g%3E%3C/svg%3E",
+    "spring": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%0A%3Cpath d=%22M256,420 C256,370 254,330 256,288%22 fill=%22none%22 stroke=%22%233E9A3A%22 stroke-width=%2226%22 stroke-linecap=%22round%22/%3E%0A%3Cpath d=%22M256,296 C226,206 140,190 82,214 C110,302 196,330 256,296 Z%22 fill=%22%236CC24A%22/%3E%0A%3Cpath d=%22M256,284 C284,190 380,160 436,186 C414,282 324,316 256,284 Z%22 fill=%22%237ED957%22/%3E%0A%3Cpath d=%22M248,290 C210,250 160,232 120,228%22 fill=%22none%22 stroke=%22%234FA834%22 stroke-width=%227%22 stroke-linecap=%22round%22/%3E%0A%3Cpath d=%22M264,278 C300,236 350,212 400,200%22 fill=%22none%22 stroke=%22%235DBB3C%22 stroke-width=%227%22 stroke-linecap=%22round%22/%3E%0A%3C/g%3E%3C/svg%3E",
+    "summer": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%0A%3Cpath d=%22M70,430 C40,320 90,190 200,135 C285,92 375,110 415,170 C365,150 310,168 292,220 C272,280 318,340 400,372 C440,388 466,404 470,430 Z%22 fill=%22%231E9BE8%22/%3E%0A%3Cpath d=%22M200,135 C285,92 375,110 415,170 C392,185 360,178 338,168 C300,150 250,150 215,172 C180,195 150,170 200,135 Z%22 fill=%22%23BFE9FF%22/%3E%0A%3Cpath d=%22M292,220 C272,280 318,340 400,372 C440,388 466,404 470,430 L300,430 C230,410 220,330 250,270 C262,248 276,232 292,220 Z%22 fill=%22%235CC4F5%22/%3E%0A%3Cpath d=%22M70,430 C55,370 70,320 105,300 C140,282 175,300 172,330 C150,318 120,325 112,355 C104,385 120,415 150,430 Z%22 fill=%22%23BFE9FF%22/%3E%0A%3Cpath d=%22M270,260 C268,300 296,336 340,358%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%2210%22 stroke-linecap=%22round%22 opacity=%22.9%22/%3E%0A%3Cpath d=%22M370,380 L392,388%22 stroke=%22%23ffffff%22 stroke-width=%2210%22 stroke-linecap=%22round%22 opacity=%22.9%22/%3E%0A%3C/g%3E%3C/svg%3E",
+    "autumn": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%0A%3Cpath stroke=%22%23F2662B%22 stroke-width=%2218%22 stroke-linejoin=%22round%22 fill=%22%23F2662B%22 d=%22M256,62 L292,150 L326,124 L320,200 L416,164 L390,250 L436,270 L350,328 L366,368 L272,342 L266,436 L246,436 L240,342 L146,368 L162,328 L76,270 L122,250 L96,164 L192,200 L186,124 L220,150 Z%22/%3E%0A%3Cg stroke=%22%23D94A16%22 stroke-width=%227%22 stroke-linecap=%22round%22 fill=%22none%22%3E%0A%3Cpath d=%22M256,340 L256,120%22/%3E%3Cpath d=%22M256,300 L380,200%22/%3E%3Cpath d=%22M256,300 L132,200%22/%3E%3Cpath d=%22M256,320 L380,290%22/%3E%3Cpath d=%22M256,320 L132,290%22/%3E%3C/g%3E%0A%3C/g%3E%3C/svg%3E",
+    "winter": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22 width=%22512%22 height=%22512%22%3E%3Cdefs%3E%3Cfilter id=%22sticker%22 x=%22-25%25%22 y=%22-25%25%22 width=%22150%25%22 height=%22150%25%22%3E%0A%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2222%22 result=%22d2%22/%3E%3CfeFlood flood-color=%22%23DDE3EA%22/%3E%3CfeComposite in2=%22d2%22 operator=%22in%22 result=%22edge%22/%3E%3CfeMorphology in=%22SourceAlpha%22 operator=%22dilate%22 radius=%2220%22 result=%22d%22/%3E%0A%3CfeGaussianBlur in=%22d%22 stdDeviation=%221%22 result=%22ds%22/%3E%0A%3CfeFlood flood-color=%22%23ffffff%22/%3E%3CfeComposite in2=%22ds%22 operator=%22in%22 result=%22border%22/%3E%0A%3CfeOffset in=%22d%22 dy=%226%22 result=%22o%22/%3E%3CfeGaussianBlur in=%22o%22 stdDeviation=%227%22 result=%22ob%22/%3E%0A%3CfeFlood flood-color=%22%231b2a3a%22 flood-opacity=%220.18%22/%3E%3CfeComposite in2=%22ob%22 operator=%22in%22 result=%22shadow%22/%3E%0A%3CfeMerge%3E%3CfeMergeNode in=%22shadow%22/%3E%3CfeMergeNode in=%22edge%22/%3E%3CfeMergeNode in=%22border%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%0A%3C/filter%3E%3C/defs%3E%3Cg filter=%22url%28%23sticker%29%22%3E%0A%3Cpath d=%22M120,335 C150,190 262,104 362,118 C432,128 458,200 450,300 L418,302 C415,252 402,218 382,206 C396,262 400,320 395,372 Z%22 fill=%22%23E53935%22/%3E%0A%3Cpath d=%22M300,140 C340,130 380,135 400,160%22 fill=%22none%22 stroke=%22%23FF6F6B%22 stroke-width=%2212%22 stroke-linecap=%22round%22/%3E%0A%3Cpath d=%22M112,338 Q262,318 408,378%22 fill=%22none%22 stroke=%22%23F5F7FA%22 stroke-width=%2270%22 stroke-linecap=%22round%22/%3E%0A%3Cpath d=%22M112,338 Q262,318 408,378%22 fill=%22none%22 stroke=%22%23E6ECF2%22 stroke-width=%2270%22 stroke-linecap=%22round%22 stroke-dasharray=%220%22 opacity=%220%22/%3E%0A%3Cpath d=%22M130,360 Q262,345 395,398%22 fill=%22none%22 stroke=%22%23E3E9F0%22 stroke-width=%2218%22 stroke-linecap=%22round%22/%3E%0A%3Ccircle cx=%22440%22 cy=%22310%22 r=%2242%22 fill=%22%23F5F7FA%22/%3E%3Cpath d=%22M412,330 A42,42 0 0 0 478,318%22 fill=%22none%22 stroke=%22%23E3E9F0%22 stroke-width=%2212%22 stroke-linecap=%22round%22/%3E%0A%3C/g%3E%3C/svg%3E"
+  };
+
+  function seasonOf(m) {
+    if (m === 1) return 'january';
+    if (m === 2) return 'february';
+    if (m >= 3 && m <= 5) return 'spring';
+    if (m >= 6 && m <= 8) return 'summer';
+    if (m >= 9 && m <= 11) return 'autumn';
+    return 'winter';
+  }
+
+  var q = (location.search.match(/season=(\w+)/) || [])[1];
+  var s = SRC[q] ? q : seasonOf(new Date().getMonth() + 1);
+
+  var img = document.createElement('img');
+  img.src = SRC[s];
+  img.alt = '';
+  img.setAttribute('aria-hidden', 'true');
+  img.className = 'season-sticker season-sticker--' + s;
+  stage.appendChild(img);
+
+  if (s === 'january') {
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'kite-string');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS(NS, 'path');
+    var anim = document.createElementNS(NS, 'animate');
+    anim.setAttribute('attributeName', 'd');
+    anim.setAttribute('dur', '3.2s');
+    anim.setAttribute('repeatCount', 'indefinite');
+    anim.setAttribute('calcMode', 'spline');
+    anim.setAttribute('keyTimes', '0;0.5;1');
+    anim.setAttribute('keySplines', '.45 0 .55 1;.45 0 .55 1');
+    path.appendChild(anim);
+    svg.appendChild(path);
+    stage.appendChild(svg);
+
+    var HAND = [26, 73];
+    var layout = function () {
+      var W = stage.offsetWidth, H = stage.offsetHeight;
+      if (!W || !H) return;
+      var kx = (img.offsetLeft + img.offsetWidth * 0.5) / W * 100;
+      var ky = (img.offsetTop + img.offsetHeight * 0.44) / H * 100;
+      function d(sag) {
+        var cx = (kx + HAND[0]) / 2 - sag, cy = (ky + HAND[1]) / 2 + sag * 0.6;
+        return 'M' + kx.toFixed(2) + ',' + ky.toFixed(2) + ' Q' + cx.toFixed(2) + ',' + cy.toFixed(2) + ' ' + HAND[0] + ',' + HAND[1];
+      }
+      path.setAttribute('d', d(6));
+      anim.setAttribute('values', d(6) + ';' + d(10) + ';' + d(6));
+    };
+    layout();
+    img.addEventListener('load', layout);
+    var ch = stage.querySelector('.char-img');
+    if (ch) ch.addEventListener('load', layout);
+    window.addEventListener('load', layout);
+    var rt2;
+    window.addEventListener('resize', function () { clearTimeout(rt2); rt2 = setTimeout(layout, 150); });
+  }
 })();
 </script>
 </body>
