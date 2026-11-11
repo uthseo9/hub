@@ -918,17 +918,24 @@ document.addEventListener('DOMContentLoaded', function () {
   var qrModalOverlay = document.getElementById('qrModalOverlay');
   var qrGenerated = false;
 
-  // 헤더 공유 버튼 클릭 시 팝업 토글
+  // 헤더 공유 버튼 클릭 시 팝업 열기/닫기 토글
   shareBtn.addEventListener('click', function (e) {
     e.stopPropagation();
+    e.preventDefault();
     var isOpen = sharePopup.classList.toggle('open');
     shareBtn.classList.toggle('active', isOpen);
     iconShare.style.display = isOpen ? 'none' : 'block';
     iconClose.style.display = isOpen ? 'block' : 'none';
   });
 
+  // 팝업 내부를 클릭할 때는 창이 닫히지 않도록 방지
+  sharePopup.addEventListener('click', function (e) {
+    e.stopPropagation();
+  });
+
+  // 바깥 영역 클릭 시 팝업 닫기
   document.addEventListener('click', function (e) {
-    if (!sharePopup.contains(e.target) && !shareBtn.contains(e.target)) {
+    if (sharePopup.classList.contains('open')) {
       sharePopup.classList.remove('open');
       shareBtn.classList.remove('active');
       iconShare.style.display = 'block';
@@ -936,7 +943,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // QR코드 아이콘 클릭 시 모달 열기
+  // QR코드 버튼 클릭 시 모달 열기
   openQrModalBtn.addEventListener('click', function (e) {
     e.stopPropagation();
     sharePopup.classList.remove('open');
@@ -1000,7 +1007,9 @@ function downloadQrCode() {
 /* 소셜 공유 함수 */
 function shareFacebook() {
   var url = encodeURIComponent(SITE_URL);
-  var width = 600; var height = 450; var left = (window.innerWidth - width) / 2 + window.screenX; var top = (window.innerHeight - height) / 2 + window.screenY;
+  var width = 600; var height = 450;
+  var left = (window.innerWidth - width) / 2 + window.screenX;
+  var top = (window.innerHeight - height) / 2 + window.screenY;
   var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + url; 
   window.open(shareUrl, 'facebook-share-dialog', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ',toolbar=no,menubar=no,scrollbars=yes,resizable=yes');
 }
@@ -1011,11 +1020,12 @@ function shareBlog() {
   window.open('https://share.naver.com/web/shareView?url=' + url + '&title=' + title, '_blank', 'width=600,height=500');
 }
 
+/* 카카오톡 버튼: 모바일은 기본 공유창, PC는 즉시 복사 */
 function shareKakao() {
-  var isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   if (isMobile && navigator.share) {
     navigator.share({
-  title = document.title;
+      title: document.title,
       text: '부산 서구 청년 정책 안내',
       url: SITE_URL
     }).catch(function(){});
@@ -1024,6 +1034,7 @@ function shareKakao() {
   }
 }
 
+/* 링크 복사 함수 */
 function copyPageLink() {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(SITE_URL).then(function () {
