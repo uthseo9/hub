@@ -1012,10 +1012,10 @@ function shareBlog() {
 }
 
 function shareKakao() {
-  var title = document.title;
-  if (navigator.share) {
+  var isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (isMobile && navigator.share) {
     navigator.share({
-      title: title,
+  title = document.title;
       text: '부산 서구 청년 정책 안내',
       url: SITE_URL
     }).catch(function(){});
